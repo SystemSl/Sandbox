@@ -68,21 +68,20 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
 
         this.count = count;
-        head = null; // Initialize head as null
+        head = null;
 
         double step = (xTo - xFrom) / (count - 1);
-        Node currentNode = null; // Initialize currentNode as null
+        Node currentNode = null;
 
         for (int i = 0; i < count; i++) {
             double x = xFrom + i * step;
-            addNode(x, source.apply(x)); // Use addNode method
+            addNode(x, source.apply(x));
             if (i == 0) {
-                head = getNode(0); // Set head to the first node
+                head = getNode(0);
             }
-            currentNode = getNode(i); // Update currentNode
+            currentNode = getNode(i);
         }
 
-        // Make the list cyclic
         if (currentNode != null) {
             currentNode.next = head;
             head.prev = currentNode;
