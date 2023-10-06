@@ -116,4 +116,38 @@ class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
         assertEquals(a.extrapolateLeft(5), 6);
     }
+
+    //Insert tests
+    @Test
+    void testInsertExistingXValue() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        a.insert(3, 6);
+        assertEquals(a.getCount(), 4);
+        assertEquals(a.getY(2), 6);
+    }
+
+    @Test
+    void testInsertNewXValue() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        a.insert(5, 6);
+        assertEquals(a.getCount(), 5);
+        assertEquals(a.getX(4), 5);
+        assertEquals(a.getY(4), 6);
+    }
+
+    @Test
+    void testInsertAtBeginning() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        a.insert(0.5, 1.5);
+        assertEquals(a.getCount(), 5);
+        assertEquals(a.getX(0), 0.5);
+        assertEquals(a.getY(0), 1.5);
+    }
+
 }

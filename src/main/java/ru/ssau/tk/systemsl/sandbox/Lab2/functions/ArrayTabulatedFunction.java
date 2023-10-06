@@ -115,4 +115,35 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
             return this.yValues[0];
         return interpolate(x, this.xValues[this.count-2], this.xValues[this.count-1], this.yValues[this.count-2], this.yValues[this.count-1]);
     }
+
+    public void insert(double x, double y) {
+        int index = indexOfX(x);
+
+        if (index != -1) {
+            yValues[index] = y;
+        } else {
+            if (count >= xValues.length) {
+                int newLength = (int) (count * 1.5);
+                double[] newXValues = new double[newLength];
+                double[] newYValues = new double[newLength];
+
+                System.arraycopy(xValues, 0, newXValues, 0, count);
+                System.arraycopy(yValues, 0, newYValues, 0, count);
+
+                xValues = newXValues;
+                yValues = newYValues;
+            }
+
+            int insertionIndex = floorIndexOfX(x);
+
+            System.arraycopy(xValues, insertionIndex, xValues, insertionIndex + 1, count - insertionIndex);
+            System.arraycopy(yValues, insertionIndex, yValues, insertionIndex + 1, count - insertionIndex);
+
+            xValues[insertionIndex] = x;
+            yValues[insertionIndex] = y;
+
+            count++;
+        }
+    }
 }
+
