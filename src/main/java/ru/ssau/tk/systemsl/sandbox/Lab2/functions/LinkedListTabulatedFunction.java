@@ -1,6 +1,6 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
     private Node head;
     private int count;
 
@@ -227,8 +227,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         else if (indexOfX(x) != -1)
             return getY(indexOfX(x));
-
-        return interpolate(x, floorNodeOfX(x));
+        else {
+            insert(x, interpolate(x, floorNodeOfX(x)));
+            return getY(indexOfX(x));
+        }
     }
 
     public void insert(double x, double y) {
@@ -257,5 +259,33 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 }
             }
         }
+    }
+
+    public void remove(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
+
+        if (count == 1) {
+            //only one element
+            head = null;
+        } else if (index == 0) {
+            //removing the first element
+            head = head.next;
+            head.prev = head.prev.prev;
+            head.prev.next = head;
+        } else if (index == count - 1) {
+            //removing the last element
+            Node nodeToRemove = getNode(index);
+            nodeToRemove.prev.next = head;
+            head.prev = nodeToRemove.prev;
+        } else {
+            //removing an element in the middle
+            Node nodeToRemove = getNode(index);
+            nodeToRemove.prev.next = nodeToRemove.next;
+            nodeToRemove.next.prev = nodeToRemove.prev;
+        }
+
+        count--;
     }
 }
