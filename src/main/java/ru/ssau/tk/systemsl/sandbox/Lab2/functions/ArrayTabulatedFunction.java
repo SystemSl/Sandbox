@@ -155,5 +155,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
         count--;
     }
+
+    public double apply(double x) {
+        if (x < leftBound()) {
+            double y = extrapolateLeft(x);
+            insert(x, y);
+            return y;
+        }
+        else if (x > rightBound()) {
+            double y = extrapolateRight(x);
+            insert(x, y);
+            return y;
+        }
+        else if (indexOfX(x) != -1)
+            return getY(indexOfX(x));
+        double y = interpolate(x, floorIndexOfX(x));
+        insert(x, y);
+        return y;
+    }
 }
 
