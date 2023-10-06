@@ -236,22 +236,26 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             addNode(x,y);
         }
         else {
-            if (x < leftBound()) {
-                addNode(x,y);
-                this.head = this.head.prev;
-            }
-            else if (x > rightBound())
-                addNode(x,y);
+            int i = indexOfX(x);
+            if (i != -1)
+                setY(i, y);
             else {
-                Node pr = floorNodeOfX(x);
-                Node nt = pr.next;
-                Node nw = new Node(x, y);
-                nw.prev = pr;
-                nw.next = nt;
-                pr.next = nw;
-                nt.prev = nw;
+                if (x < leftBound()) {
+                    addNode(x, y);
+                    this.head = this.head.prev;
+                } else if (x > rightBound()) {
+                    addNode(x, y);
+                }
+                else {
+                    Node pr = floorNodeOfX(x);
+                    Node nt = pr.next;
+                    Node nw = new Node(x, y);
+                    nw.prev = pr;
+                    nw.next = nt;
+                    pr.next = nw;
+                    nt.prev = nw;
+                }
             }
         }
-        this.count++;
     }
 }
