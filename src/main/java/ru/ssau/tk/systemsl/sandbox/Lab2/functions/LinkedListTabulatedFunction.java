@@ -252,5 +252,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 nt.prev = nw;
             }
         }
+        this.count++;
     }
 }
