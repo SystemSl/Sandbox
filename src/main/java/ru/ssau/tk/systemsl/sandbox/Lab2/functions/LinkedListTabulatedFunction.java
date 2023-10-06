@@ -4,6 +4,26 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
     private int count;
 
+    public void addNode(double x, double y) {
+        Node newNode = new Node(x, y);
+
+        if (head == null) {
+            // If empty, the new node becomes the head
+            head = newNode;
+            newNode.next = newNode;
+            newNode.prev = newNode;
+        } else {
+            // If not empty, add the new node to the end
+            Node lastNode = head.prev;
+
+            lastNode.next = newNode;
+            newNode.prev = lastNode;
+            newNode.next = head;
+            head.prev = newNode;
+        }
+        count++;
+    }
+    /*
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length || xValues.length == 0) {
             throw new IllegalArgumentException("Input arrays must have the same length and not be empty");
@@ -23,6 +43,17 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         // Make the list cyclic
         currentNode.next = head;
         head.prev = currentNode;
+    }
+    */
+
+    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length || xValues.length == 0) {
+            throw new IllegalArgumentException("Input arrays must have the same length and not be empty");
+        }
+
+        for (int i = 0; i < xValues.length; i++) {
+            addNode(xValues[i], yValues[i]);
+        }
     }
 
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
@@ -174,23 +205,29 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     private Node floorNodeOfX(double x) {
         Node currentNode = head;
+
         for (int i = 0; i < count; i++) {
             if (currentNode.x < x && currentNode.next.x > x) {
                 return currentNode;
             }
             currentNode = currentNode.next;
         }
+
         return null; //out of bounds
     }
 
     @Override
     public double apply(double x) {
+
         if (x < leftBound())
             return extrapolateLeft(x);
+
         else if (x > rightBound())
             return extrapolateRight(x);
+
         else if (indexOfX(x) != -1)
             return getY(indexOfX(x));
+
         return interpolate(x, floorNodeOfX(x));
     }
 
