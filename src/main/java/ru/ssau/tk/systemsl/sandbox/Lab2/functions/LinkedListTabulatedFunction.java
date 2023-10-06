@@ -68,21 +68,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
 
         this.count = count;
-        head = new Node(xFrom, source.apply(xFrom));
+        head = null; // Initialize head as null
 
         double step = (xTo - xFrom) / (count - 1);
-        Node currentNode = head;
+        Node currentNode = null; // Initialize currentNode as null
 
-        for (int i = 1; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             double x = xFrom + i * step;
-            currentNode.next = new Node(x, source.apply(x));
-            currentNode.next.prev = currentNode;
-            currentNode = currentNode.next;
+            addNode(x, source.apply(x)); // Use addNode method
+            if (i == 0) {
+                head = getNode(0); // Set head to the first node
+            }
+            currentNode = getNode(i); // Update currentNode
         }
 
         // Make the list cyclic
-        currentNode.next = head;
-        head.prev = currentNode;
+        if (currentNode != null) {
+            currentNode.next = head;
+            head.prev = currentNode;
+        }
     }
 
     private Node getNode(int index) {
