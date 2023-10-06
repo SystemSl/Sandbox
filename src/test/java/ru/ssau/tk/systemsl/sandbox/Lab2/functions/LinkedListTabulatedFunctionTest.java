@@ -171,14 +171,14 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    void TFTest0() {
+    void TFTest1() {
         SqrFunction s = new SqrFunction();
         LinkedListTabulatedFunction a = new LinkedListTabulatedFunction(s, 0, 3, 100);
         assertEquals(9, a.getY(99), 0.00001);
     }
 
     @Test
-    void TFTest1() {
+    void TFTest2() {
         ConstantFunction s = new ConstantFunction(5);
         LinkedListTabulatedFunction a = new LinkedListTabulatedFunction(s, 0, 3, 10);
         assertEquals(5, a.getY(5), 0.00001);

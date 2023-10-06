@@ -23,28 +23,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         count++;
     }
-    /*
-    public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length != yValues.length || xValues.length == 0) {
-            throw new IllegalArgumentException("Input arrays must have the same length and not be empty");
-        }
-
-        count = xValues.length;
-        head = new Node(xValues[0], yValues[0]);
-
-        Node currentNode = head;
-
-        for (int i = 1; i < xValues.length; i++) {
-            currentNode.next = new Node(xValues[i], yValues[i]);
-            currentNode.next.prev = currentNode;
-            currentNode = currentNode.next;
-        }
-
-        // Make the list cyclic
-        currentNode.next = head;
-        head.prev = currentNode;
-    }
-    */
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length || xValues.length == 0) {
