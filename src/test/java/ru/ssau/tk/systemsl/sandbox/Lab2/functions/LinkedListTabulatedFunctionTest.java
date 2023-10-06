@@ -127,4 +127,22 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(2.0, equalXFunction.apply(1.0), 0.0001);
         assertEquals(4.0, equalXFunction.apply(2.0), 0.0001);
     }
+
+    @Test
+    void TestInsertInTheBegin() {
+        function.insert(-1, -2);
+        assertEquals(-2, function.getY(0));
+    }
+
+    @Test
+    void TestInsertInTheEnd() {
+        function.insert(10, 5);
+        assertEquals(5, function.getY(4));
+    }
+
+    @Test
+    void TestInsertInside() {
+        function.insert(2.5, 5);
+        assertEquals(5, function.getY(2));
+    }
 }

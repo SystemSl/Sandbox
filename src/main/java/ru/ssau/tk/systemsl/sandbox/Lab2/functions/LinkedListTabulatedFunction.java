@@ -1,6 +1,6 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable{
     private Node head;
     private int count;
 
@@ -231,4 +231,31 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return interpolate(x, floorNodeOfX(x));
     }
 
+    public void insert(double x, double y) {
+        if (this.count == 0) {
+            addNode(x,y);
+        }
+        else {
+            int i = indexOfX(x);
+            if (i != -1)
+                setY(i, y);
+            else {
+                if (x < leftBound()) {
+                    addNode(x, y);
+                    this.head = this.head.prev;
+                } else if (x > rightBound()) {
+                    addNode(x, y);
+                }
+                else {
+                    Node pr = floorNodeOfX(x);
+                    Node nt = pr.next;
+                    Node nw = new Node(x, y);
+                    nw.prev = pr;
+                    nw.next = nt;
+                    pr.next = nw;
+                    nt.prev = nw;
+                }
+            }
+        }
+    }
 }
