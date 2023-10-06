@@ -23,20 +23,25 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         else {
             this.count = count;
             this.xValues = new double[count];
+            this.yValues = new double[count];
             if (xFrom > xTo) {
                 xTo = xFrom + xTo;
                 xFrom = xTo - xFrom;
                 xTo = xTo - xFrom;
             } else if (xFrom == xTo) {
+                double d = (xFrom - xTo) / (count - 1);
+                double xs = xFrom;
                 double y = source.apply(xFrom);
-                for (int i = 0; i < count; i++) {
-                    this.xValues[i] = y;
+                for (int i = 0; i < count; i++, xs+=d) {
+                    this.yValues[i] = y;
+                    this.xValues[i] = xs;
                 }
             } else {
                 double d = (xFrom - xTo) / (count - 1);
                 double xs = xFrom;
                 for (int i = 0; i < count; i++, xs += d) {
-                    this.xValues[i] = source.apply(xs);
+                    this.yValues[i] = source.apply(xs);
+                    this.xValues[i] = xs;
                 }
             }
         }
