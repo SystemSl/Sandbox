@@ -145,4 +145,29 @@ public class LinkedListTabulatedFunctionTest {
         function.insert(2.5, 5);
         assertEquals(5, function.getY(2));
     }
+
+    @Test
+    void TestRemoveX0() {
+        function.remove(0);
+        assertEquals(1, function.getX(0));
+        assertEquals(2, function.getX(1));
+        assertEquals(3, function.getX(2));
+    }
+
+    @Test
+    void TestRemoveX2() {
+        function.remove(1);
+        assertEquals(0, function.getX(0));
+        assertEquals(2, function.getX(1));
+        assertEquals(3, function.getX(2));
+    }
+
+    @Test
+    void TestRemoveX3() {
+        function.remove(3);
+        assertEquals(0, function.getX(0));
+        assertEquals(1, function.getX(1));
+        assertEquals(2, function.getX(2));
+    }
+
 }
