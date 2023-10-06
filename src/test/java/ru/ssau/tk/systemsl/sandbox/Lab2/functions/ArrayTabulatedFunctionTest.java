@@ -76,7 +76,7 @@ class ArrayTabulatedFunctionTest {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
-        assertEquals(a.floorIndexOfX(3), 1);
+        assertEquals(a.floorIndexOfX(2.5), 1);
     }
     @Test
     void floorIndexOfX2() {
@@ -150,4 +150,12 @@ class ArrayTabulatedFunctionTest {
         assertEquals(a.getY(0), 1.5);
     }
 
+    @Test
+    void remove() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        a.remove(0);
+        assertEquals(2, a.getX(0));
+    }
 }

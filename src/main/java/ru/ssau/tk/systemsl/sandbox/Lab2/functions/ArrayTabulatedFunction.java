@@ -1,7 +1,7 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
     protected double[] xValues;
     protected double[] yValues;
     protected int count;
@@ -123,7 +123,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
             yValues[index] = y;
         } else {
             if (count >= xValues.length) {
-                int newLength = (int) (count * 1.5);
+                int newLength = count+1;
                 double[] newXValues = new double[newLength];
                 double[] newYValues = new double[newLength];
 
@@ -144,6 +144,34 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction{
 
             count++;
         }
+    }
+    public void remove(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
+        if (count > 1) {
+            System.arraycopy(xValues, index + 1, xValues, index, count - index - 1);
+            System.arraycopy(yValues, index + 1, yValues, index, count - index - 1);
+        }
+        count--;
+    }
+
+    public double apply(double x) {
+        if (x < leftBound()) {
+            double y = extrapolateLeft(x);
+            insert(x, y);
+            return y;
+        }
+        else if (x > rightBound()) {
+            double y = extrapolateRight(x);
+            insert(x, y);
+            return y;
+        }
+        else if (indexOfX(x) != -1)
+            return getY(indexOfX(x));
+        double y = interpolate(x, floorIndexOfX(x));
+        insert(x, y);
+        return y;
     }
 }
 
