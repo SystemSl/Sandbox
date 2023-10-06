@@ -158,4 +158,20 @@ class ArrayTabulatedFunctionTest {
         a.remove(0);
         assertEquals(2, a.getX(0));
     }
+
+    @Test
+    void TFTest1() {
+        SqrFunction s = new SqrFunction();
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(s, 0, 3, 100);
+        assertEquals(9, a.getY(99), 0.00001);
+    }
+
+    @Test
+    void TFTest2() {
+        ConstantFunction s = new ConstantFunction(5);
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(s, 0, 3, 10);
+        assertEquals(5, a.getY(5), 0.00001);
+        ArrayTabulatedFunction b = new ArrayTabulatedFunction(a, -3, 3, 20);
+        assertEquals(5, b.getY(5), 0.00001);
+    }
 }
