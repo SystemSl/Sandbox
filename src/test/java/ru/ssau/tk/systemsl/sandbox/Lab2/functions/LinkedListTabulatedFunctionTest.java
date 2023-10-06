@@ -92,4 +92,39 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(14.0, function.extrapolateRight(4.0), 0.0001);
         assertEquals(11.5, function.extrapolateRight(3.5), 0.0001);
     }
+
+    @Test
+    void testApplyInsideRange() {
+        assertEquals(0.0, function.apply(0.0), 0.0001);
+        assertEquals(1.0, function.apply(1.0), 0.0001);
+        assertEquals(4.0, function.apply(2.0), 0.0001);
+
+        // Interpolation
+        assertEquals(0.5, function.apply(0.5), 0.0001);
+        assertEquals(2.5, function.apply(1.5), 0.0001);
+        assertEquals(6.5, function.apply(2.5), 0.0001);
+    }
+
+    @Test
+    void testApplyOutsideRange() {
+        assertEquals(-1.0, function.apply(-1.0));
+        assertEquals(14.0, function.apply(4.0), 0.0001);
+    }
+
+    @Test
+    void testApplyBetweenValues() {
+        assertEquals(0.25, function.apply(0.25), 0.0001);
+        assertEquals(7.75, function.apply(2.75), 0.0001);
+    }
+
+    @Test
+    void testApplyEqualXValues() {
+        double[] xValues = {0.0, 0.0, 1.0, 1.0, 2.0, 2.0};
+        double[] yValues = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
+        LinkedListTabulatedFunction equalXFunction = new LinkedListTabulatedFunction(xValues, yValues);
+
+        assertEquals(0.0, equalXFunction.apply(0.0), 0.0001);
+        assertEquals(2.0, equalXFunction.apply(1.0), 0.0001);
+        assertEquals(4.0, equalXFunction.apply(2.0), 0.0001);
+    }
 }
