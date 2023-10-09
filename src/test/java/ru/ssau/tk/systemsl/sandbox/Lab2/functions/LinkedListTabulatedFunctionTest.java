@@ -143,7 +143,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     void TestInsertInside() {
         function.insert(2.5, 5);
-        assertEquals(5, function.getY(2));
+        assertEquals(5, function.getY(3));
     }
 
     @Test
