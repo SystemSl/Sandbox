@@ -5,14 +5,17 @@ public class IdentityFunction implements MathFunction, Cloneable {
         return x;
     }
 
+    @Override
     public String toString() {
         return "IdentityFunction";
     }
 
+    @Override
     public boolean equals(Object o) {
         return (this.getClass() == o.getClass());
     }
 
+    @Override
     public int hashCode() {
         return this.getClass().hashCode();
     }
