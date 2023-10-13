@@ -174,4 +174,43 @@ class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction b = new ArrayTabulatedFunction(a, -3, 3, 20);
         assertEquals(5, b.getY(5), 0.00001);
     }
+
+    @Test
+    void tS() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        assertEquals(a.toString(), "(1.0, 2.0) (2.0, 3.0) (3.0, 4.0) (4.0, 5.0) ");
+    }
+
+    @Test
+    void cl() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
+        assertEquals(b.toString(), "(1.0, 2.0) (2.0, 3.0) (3.0, 4.0) (4.0, 5.0) ");
+    }
+
+    @Test
+    void eq() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
+        assertEquals(a, b);
+        assertEquals(b, a);
+    }
+
+    @Test
+    void hC() {
+        double[] x = {1, 2, 3, 4};
+        double[] y = {2, 3, 4, 5};
+        double[] x1 = {2, 2, 3, 4};
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
+        ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
+        ArrayTabulatedFunction c = new ArrayTabulatedFunction(x1, y);
+        assertEquals(a.hashCode(), b.hashCode());
+        assertNotEquals(a.hashCode(), c.hashCode());
+    }
 }

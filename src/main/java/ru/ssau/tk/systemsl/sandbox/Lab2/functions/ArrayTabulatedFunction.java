@@ -178,5 +178,46 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         insert(x, y);
         return y;
     }
+
+    @Override
+    public String toString() {
+        String ans = "";
+        for (int i = 0; i < this.count; i++) {
+            ans += "(" + this.xValues[i] + ", " + this.yValues[i] + ") ";
+        }
+        return ans;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getClass() != o.getClass()) return false;
+        ArrayTabulatedFunction obj = (ArrayTabulatedFunction) o;
+        if (this.count != obj.count) return false;
+        for (int i = 0; i < this.count; i++) {
+            if ((this.xValues[i] != obj.xValues[i]) || (this.yValues[i] != obj.yValues[i]))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hc = 0;
+        int fb;
+        long l;
+        for (int i = 0; i < this.count; i++) {
+            l = Double.doubleToLongBits(this.xValues[i]);
+            fb = (int) (l >> 32);
+            hc ^= fb;
+            fb = (int) (l);
+            hc ^= fb;
+        }
+        return hc;
+    }
+
+    @Override
+    public Object clone() {
+        return new ArrayTabulatedFunction(this.xValues, this.yValues);
+    }
 }
 
