@@ -181,9 +181,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public String toString() {
-        String ans = "";
-        for (int i = 0; i < this.count; i++) {
-            ans += "(" + this.xValues[i] + ", " + this.yValues[i] + ") ";
+        String ans = "("+ this.xValues[0] + "; " + this.yValues[0] + ")";
+        for (int i = 1; i < this.count; i++) {
+            ans += " (" + this.xValues[i] + "; " + this.yValues[i] + ")";
         }
         return ans;
     }
@@ -207,6 +207,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         long l;
         for (int i = 0; i < this.count; i++) {
             l = Double.doubleToLongBits(this.xValues[i]);
+            fb = (int) (l >> 32);
+            hc ^= fb;
+            fb = (int) (l);
+            hc ^= fb;
+        }
+        for (int i = 0; i < this.count; i++) {
+            l = Double.doubleToLongBits(this.yValues[i]);
             fb = (int) (l >> 32);
             hc ^= fb;
             fb = (int) (l);

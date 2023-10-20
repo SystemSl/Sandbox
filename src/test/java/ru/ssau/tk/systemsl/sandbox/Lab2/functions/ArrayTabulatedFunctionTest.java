@@ -180,7 +180,7 @@ class ArrayTabulatedFunctionTest {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
-        assertEquals(a.toString(), "(1.0, 2.0) (2.0, 3.0) (3.0, 4.0) (4.0, 5.0) ");
+        assertEquals(a.toString(), "(1.0; 2.0) (2.0; 3.0) (3.0; 4.0) (4.0; 5.0)");
     }
 
     @Test
