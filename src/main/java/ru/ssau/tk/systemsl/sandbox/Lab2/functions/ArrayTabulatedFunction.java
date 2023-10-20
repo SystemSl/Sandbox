@@ -223,7 +223,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
 
     @Override
-    public Object clone() {
+    protected Object clone() {
         return new ArrayTabulatedFunction(this.xValues, this.yValues);
     }
 }
