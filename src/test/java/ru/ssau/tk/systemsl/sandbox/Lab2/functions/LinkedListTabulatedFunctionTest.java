@@ -219,4 +219,31 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(node, clonedNode);
     }
 
+    @Test
+    void toStringTest() {
+        assertEquals("(0.0; 0.0) (1.0; 1.0) (2.0; 4.0) (3.0; 9.0)", function.toString());
+    }
+
+    @Test
+    public void testEquals() {
+        LinkedListTabulatedFunction function1 = new LinkedListTabulatedFunction(new double[]{0.0, 1.0, 2.0, 3.0}, new double[]{0.0, 1.0, 4.0, 9.0});
+        LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(new double[]{2.0, 3.0, 4.0, 5.0}, new double[]{10.0, 20.0, 40.0, 50.0});
+        assertEquals(function, function1);
+        assertNotEquals(function, function2);
+    }
+
+    @Test
+    public void testHashCode() {
+        LinkedListTabulatedFunction function1 = new LinkedListTabulatedFunction(new double[]{0.0, 1.0, 2.0, 3.0}, new double[]{0.0, 1.0, 4.0, 9.0});
+        LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(new double[]{2.0, 3.0, 4.0, 5.0}, new double[]{10.0, 20.0, 40.0, 50.0});
+        assertEquals(function.hashCode(), function1.hashCode());
+        assertNotEquals(function.hashCode(), function2.hashCode());
+    }
+
+    @Test
+    public void testClone() {
+        LinkedListTabulatedFunction clonedFunction = (LinkedListTabulatedFunction) function.clone();
+        assertNotSame(function, clonedFunction);
+        assertEquals(function, clonedFunction);
+    }
 }

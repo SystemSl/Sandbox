@@ -224,6 +224,34 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         public double x;
         public double y;
 
+        @Override
+        public String toString() {
+            return ("("+ x + "; " + y + ")");
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node oNode = (Node) o;
+            return Double.compare(oNode.x, x) == 0 &&
+                    Double.compare(oNode.y, y) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * 31 * Double.hashCode(x)  + Double.hashCode(y);
+        }
+
+        @Override
+        protected Object clone() {
+
+            Node cloneNode = new Node(x,y);
+            cloneNode.prev = this.prev;
+            cloneNode.next = this.next;
+            return cloneNode;
+        }
+
         public Node(double x, double y) {
             this.x = x;
             this.y = y;
