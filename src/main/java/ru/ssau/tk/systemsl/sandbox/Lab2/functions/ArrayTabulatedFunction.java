@@ -212,6 +212,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             fb = (int) (l);
             hc ^= fb;
         }
+        for (int i = 0; i < this.count; i++) {
+            l = Double.doubleToLongBits(this.yValues[i]);
+            fb = (int) (l >> 32);
+            hc ^= fb;
+            fb = (int) (l);
+            hc ^= fb;
+        }
         return hc;
     }
 
