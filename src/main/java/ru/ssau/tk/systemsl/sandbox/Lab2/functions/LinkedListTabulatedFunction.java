@@ -133,7 +133,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     @Override
-    public Object clone() {
+    protected Object clone() {
         double[] CloneXValues = new double[count];
         double[] CloneYValues = new double[count];
         Node node1 = head;
