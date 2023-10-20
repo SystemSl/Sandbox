@@ -98,6 +98,52 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         getNode(index).y = value;
     }
 
+    @Override
+    public String toString() {
+        Node node = head.next;
+        String ans = head.toString();
+        for (int i = 1; i < this.count; i++, node = node.next) {
+            ans += " " + node.toString();
+        }
+        return ans;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getClass() != o.getClass()) return false;
+        LinkedListTabulatedFunction obj = (LinkedListTabulatedFunction) o;
+        if (this.count != obj.count) return false;
+        Node node1 = head;
+        Node node2 = obj.head;
+        for (int i = 1; i < this.count; i++, node1 = node1.next, node2 = node2.next) {
+            if (!(node1.equals(node2)))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        Node node = head.next;
+        int result = 31 * head.hashCode();
+        for (int i = 0; i < count; i++, node = node.next) {
+            result = 31 * result + node.hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    public Object clone() {
+        double[] CloneXValues = new double[count];
+        double[] CloneYValues = new double[count];
+        Node node1 = head;
+        for (int i = 0; i < count; i++, node1 = node1.next) {
+            CloneXValues[i] = node1.x;
+            CloneYValues[i] = node1.y;
+        }
+        return new LinkedListTabulatedFunction(CloneXValues, CloneYValues);
+    }
+
     public int indexOfX(double x) {
         for (int i = 0; i < count; i++) {
             if (getX(i) == x) {
@@ -172,7 +218,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return interpolate(x, xN1, xN, yN1, yN);
     }
 
-    private static class Node {
+     static class Node {
         public Node next;
         public Node prev;
         public double x;

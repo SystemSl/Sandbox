@@ -185,4 +185,38 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction b = new LinkedListTabulatedFunction(a, -3, 3, 20);
         assertEquals(5, b.getY(5), 0.00001);
     }
+
+    @Test
+    public void testNodeToString() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        String expected = "(1.1; -5.5)";
+        assertEquals(expected, node.toString());
+    }
+
+    @Test
+    public void testNodeEquals() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1.2, -5.5);
+        assertEquals(node1, node2);
+        assertNotEquals(node1, node3);
+    }
+
+    @Test
+    public void testNodeHashCode() {
+        LinkedListTabulatedFunction.Node node1 = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(1.2, -5.5);
+        assertEquals(node2.hashCode(), node1.hashCode());
+        assertNotEquals(node3.hashCode(), node1.hashCode());
+    }
+
+    @Test
+    public void testNodeClone() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+        LinkedListTabulatedFunction.Node clonedNode = (LinkedListTabulatedFunction.Node) node.clone();
+        assertNotSame(node, clonedNode);
+        assertEquals(node, clonedNode);
+    }
+
 }
