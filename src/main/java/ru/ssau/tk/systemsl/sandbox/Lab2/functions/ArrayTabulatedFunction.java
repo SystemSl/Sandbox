@@ -181,9 +181,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public String toString() {
-        String ans = "";
-        for (int i = 0; i < this.count; i++) {
-            ans += "(" + this.xValues[i] + ", " + this.yValues[i] + ") ";
+        String ans = "("+ this.xValues[0] + ", " + this.yValues[0] + ")";
+        for (int i = 1; i < this.count; i++) {
+            ans += " (" + this.xValues[i] + ", " + this.yValues[i] + ")";
         }
         return ans;
     }
