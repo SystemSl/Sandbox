@@ -110,7 +110,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public boolean equals(Object o) {
-        if (this.getClass() != o.getClass()) return false;
+        if (this.getClass() != o.getClass()) return false;      // +Null check
         LinkedListTabulatedFunction obj = (LinkedListTabulatedFunction) o;
         if (this.count != obj.count) return false;
         Node node1 = head;

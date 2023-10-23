@@ -190,7 +190,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public boolean equals(Object o) {
-        if (this.getClass() != o.getClass()) return false;
+        if (this.getClass() != o.getClass()) return false;      // +Null check
         ArrayTabulatedFunction obj = (ArrayTabulatedFunction) o;
         if (this.count != obj.count) return false;
         for (int i = 0; i < this.count; i++) {
