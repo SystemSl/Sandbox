@@ -228,8 +228,12 @@ public class LinkedListTabulatedFunctionTest {
     public void testEquals() {
         LinkedListTabulatedFunction function1 = new LinkedListTabulatedFunction(new double[]{0.0, 1.0, 2.0, 3.0}, new double[]{0.0, 1.0, 4.0, 9.0});
         LinkedListTabulatedFunction function2 = new LinkedListTabulatedFunction(new double[]{2.0, 3.0, 4.0, 5.0}, new double[]{10.0, 20.0, 40.0, 50.0});
+        ArrayTabulatedFunction function3 = new ArrayTabulatedFunction(new double[]{0.0, 1.0, 2.0, 3.0}, new double[]{0.0, 1.0, 4.0, 9.0});
+        LinkedListTabulatedFunction function4 = null;
         assertEquals(function, function1);
         assertNotEquals(function, function2);
+        assertEquals(function, function3);
+        assertNotEquals(function, function4);
     }
 
     @Test

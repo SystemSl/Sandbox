@@ -1,7 +1,7 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Insertable, Removable{
     protected double[] xValues;
     protected double[] yValues;
     protected int count;
@@ -160,7 +160,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
         count--;
     }
-
     public double apply(double x) {
         if (x < leftBound()) {
             double y = extrapolateLeft(x);
@@ -190,11 +189,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
 
     @Override
     public boolean equals(Object o) {
-        if (this.getClass() != o.getClass()) return false;      // +Null check
-        ArrayTabulatedFunction obj = (ArrayTabulatedFunction) o;
-        if (this.count != obj.count) return false;
+        if (o == null) return false;
+        if (!(o instanceof TabulatedFunction obj)) return false;
+        if (this.count != obj.getCount()) return false;
         for (int i = 0; i < this.count; i++) {
-            if ((this.xValues[i] != obj.xValues[i]) || (this.yValues[i] != obj.yValues[i]))
+            if ((this.xValues[i] != obj.getX(i)) || (this.yValues[i] != obj.getY(i)))
                 return false;
         }
         return true;

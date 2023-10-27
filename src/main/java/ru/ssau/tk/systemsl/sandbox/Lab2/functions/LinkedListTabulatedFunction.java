@@ -83,7 +83,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public int getCount() {
-        return 0;
+        return count;
     }
 
     public double getX(int index) {
@@ -110,13 +110,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public boolean equals(Object o) {
-        if (this.getClass() != o.getClass()) return false;      // +Null check
-        LinkedListTabulatedFunction obj = (LinkedListTabulatedFunction) o;
-        if (this.count != obj.count) return false;
+        if (o == null) return false;
+        if (!(o instanceof TabulatedFunction obj)) return false;
+        if (this.count != obj.getCount()) return false;
         Node node1 = head;
-        Node node2 = obj.head;
-        for (int i = 1; i < this.count; i++, node1 = node1.next, node2 = node2.next) {
-            if (!(node1.equals(node2)))
+        for (int i = 0; i < this.count; i++, node1 = node1.next) {
+            if (node1.x != obj.getX(i) || node1.y != obj.getY(i))
                 return false;
         }
         return true;

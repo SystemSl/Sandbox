@@ -196,10 +196,16 @@ class ArrayTabulatedFunctionTest {
     void eq() {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
+        double[] x1 = {2, 2, 3, 4};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
         ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
+        ArrayTabulatedFunction c = new ArrayTabulatedFunction(x1, y);
+        LinkedListTabulatedFunction d = new LinkedListTabulatedFunction(x, y);
+        ArrayTabulatedFunction e = null;
         assertEquals(a, b);
-        assertEquals(b, a);
+        assertNotEquals(a, c);
+        assertNotEquals(a, e);
+        assertEquals(a, d);
     }
 
     @Test
