@@ -32,7 +32,7 @@ class TabulatedFunctionOperationServiceTest {
         }
     }
     @Test
-    void AdditionTest() {
+    void AdditionSubtractionTest() {
         ArrayTabulatedFunction ans1 = new ArrayTabulatedFunction(x1, y1);
         ArrayTabulatedFunction ans2 = new ArrayTabulatedFunction(x2, y2);
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(xValues, yValues);
@@ -40,5 +40,29 @@ class TabulatedFunctionOperationServiceTest {
         TabulatedFunctionOperationService op = new TabulatedFunctionOperationService();
         assertEquals(ans1, op.Addition(a, b));
         assertEquals(ans2, op.Subtraction(b, a));
+    }
+
+    @Test
+    void MultiplicationDivisionTest() {
+        double[] xValues = {1.0, 2.0, 3.0, 4.0};
+        double[] yValues = {1.0, 2.0, 3.0, 4.0};
+        double[] x1 = {1.0, 2.0, 3.0, 4.0};
+        double[] y1 = {1.0, 4.0, 9.0, 16.0};
+        double[] x2 = {1.0, 2.0, 3.0, 4.0};
+        double[] y2 = {1.0, 1.0, 1.0, 1.0};
+
+        ArrayTabulatedFunction ans1 = new ArrayTabulatedFunction(x1, y1);
+        ArrayTabulatedFunction ans2 = new ArrayTabulatedFunction(x2, y2);
+
+        ArrayTabulatedFunction a = new ArrayTabulatedFunction(xValues, yValues);
+        LinkedListTabulatedFunction b = new LinkedListTabulatedFunction(xValues, yValues);
+
+        TabulatedFunctionOperationService op = new TabulatedFunctionOperationService();
+
+        // Test Multiplication
+        assertEquals(ans1, op.Multiplication(a, b));
+
+        // Test Division
+        assertEquals(ans2, op.Division(a, b));
     }
 }
