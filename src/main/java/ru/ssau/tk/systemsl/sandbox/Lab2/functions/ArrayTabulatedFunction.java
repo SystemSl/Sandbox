@@ -1,7 +1,9 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+import java.util.Iterator;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Insertable, Removable{
     protected double[] xValues;
@@ -212,6 +214,27 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     @Override
     protected Object clone() {
         return new ArrayTabulatedFunction(this.xValues, this.yValues);
+    }
+
+    @Override
+    public Iterator<Point>  iterator() {
+        Iterator<Point> iterator = new Iterator<Point>() {
+            int i;
+
+            @Override
+            public boolean hasNext() {
+                return (i < count);
+            }
+
+            @Override
+            public Point next() {
+                if (hasNext())
+                    return new Point(xValues[i], yValues[i++]);
+                else
+                    throw new NoSuchElementException();
+            }
+        };
+        return iterator;
     }
 }
 

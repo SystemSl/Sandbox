@@ -1,5 +1,5 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
-
+import java.util.Iterator;
 import org.junit.jupiter.api.Test;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
@@ -276,5 +276,31 @@ class ArrayTabulatedFunctionTest {
         double[] y = {2.0, 4.0, 6.0};
         assertThrows(DifferentLengthOfArraysException.class, () ->{new ArrayTabulatedFunction(x1, y);});
         assertThrows(ArrayIsNotSortedException.class, () ->{new ArrayTabulatedFunction(x2, y);});
+    }
+
+    @Test
+    public void IteratorWhileTest() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction f = new ArrayTabulatedFunction(x, y);
+        Iterator<Point> iterator = f.iterator();
+        int i = 0;
+        while(iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(x[i], point.x);
+            assertEquals(y[i++], point.y);
+        }
+    }
+
+    @Test
+    public void IteratorForEachTest() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction f = new ArrayTabulatedFunction(x, y);
+        int i = 0;
+        for (Point point : f) {
+            assertEquals(x[i], point.x);
+            assertEquals(y[i++], point.y);
+        }
     }
 }
