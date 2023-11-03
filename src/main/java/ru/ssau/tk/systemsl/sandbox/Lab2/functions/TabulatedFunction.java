@@ -1,6 +1,7 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
+import java.util.Iterator;
 
-public interface TabulatedFunction extends MathFunction {
+public interface TabulatedFunction extends MathFunction, Iterable<Point> {
 
     //obtaining the number of tabulated values
     int getCount();
@@ -25,4 +26,8 @@ public interface TabulatedFunction extends MathFunction {
 
     //returns the rightmost x
     double rightBound();
+    @Override
+    default Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
+    }
 }
