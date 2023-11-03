@@ -1,5 +1,5 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
-
+import java.util.Iterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -76,5 +76,19 @@ class UnmodifiableTabulatedFunctionTest {
     void apply() {
         assertEquals(Af.apply(0.5), UAf.apply(0.5));
         assertEquals(Lf.apply(0.5), ULf.apply(0.5));
+    }
+
+    @Test
+    public void Iterator() {
+        int i = 0;
+        for (Point point : UAf) {
+            assertEquals(Af.getX(i), point.x);
+            assertEquals(Af.getY(i++), point.y);
+        }
+        i = 0;
+        for (Point point : ULf) {
+            assertEquals(Lf.getX(i), point.x);
+            assertEquals(Lf.getY(i++), point.y);
+        }
     }
 }

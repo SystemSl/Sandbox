@@ -1,5 +1,5 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
-
+import java.util.Iterator;
 public class UnmodifiableTabulatedFunction implements TabulatedFunction{
 
     TabulatedFunction function;
@@ -48,5 +48,9 @@ public class UnmodifiableTabulatedFunction implements TabulatedFunction{
 
     public double apply(double x) {
         return function.apply(x);
+    }
+
+    public Iterator<Point> iterator(){
+        return function.iterator();
     }
 }
