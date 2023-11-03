@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -281,5 +282,35 @@ public class LinkedListTabulatedFunctionTest {
         double[] y = {2.0, 4.0, 6.0};
         assertThrows(DifferentLengthOfArraysException.class, () ->{new LinkedListTabulatedFunction(x1, y);});
         assertThrows(ArrayIsNotSortedException.class, () ->{new LinkedListTabulatedFunction(x2, y);});
+    }
+
+    @Test
+    void testIteratorWithWhileLoop() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(x, y);
+        Iterator<Point> iterator = function.iterator();
+        int index = 0;
+
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(x[index], point.x);
+            assertEquals(y[index], point.y);
+            index++;
+        }
+    }
+
+    @Test
+    void testIteratorWithForEachLoop() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(x, y);
+        int index = 0;
+
+        for (Point point : function) {
+            assertEquals(x[index], point.x);
+            assertEquals(y[index], point.y);
+            index++;
+        }
     }
 }
