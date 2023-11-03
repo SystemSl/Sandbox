@@ -1,6 +1,8 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
     private Node head;
@@ -359,5 +361,29 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
 
         count--;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                double x = node.x;
+                double y = node.y;
+                if (node != head.prev) node = node.next;
+                else node = null;
+                return new Point(x, y);
+            }
+        };
     }
 }
