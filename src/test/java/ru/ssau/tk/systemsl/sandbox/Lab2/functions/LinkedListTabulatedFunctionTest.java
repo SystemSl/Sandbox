@@ -2,6 +2,9 @@ package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LinkedListTabulatedFunctionTest {
@@ -115,18 +118,6 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(0.25, function.apply(0.25), 0.0001);
         assertEquals(7.75, function.apply(2.75), 0.0001);
     }
-
-    @Test
-    void testApplyEqualXValues() {
-        double[] xValues = {0.0, 0.0, 1.0, 1.0, 2.0, 2.0};
-        double[] yValues = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0};
-        LinkedListTabulatedFunction equalXFunction = new LinkedListTabulatedFunction(xValues, yValues);
-
-        assertEquals(0.0, equalXFunction.apply(0.0), 0.0001);
-        assertEquals(2.0, equalXFunction.apply(1.0), 0.0001);
-        assertEquals(4.0, equalXFunction.apply(2.0), 0.0001);
-    }
-
     @Test
     void TestInsertInTheBegin() {
         function.insert(-1, -2);
@@ -281,5 +272,14 @@ public class LinkedListTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             function.floorIndexOfX(0.5);
         });
+    }
+
+    @Test
+    public void ConstructorException() {
+        double[] x1 = {1.0, 2.0, 3.0, 4.0};
+        double[] x2 = {1.0, 2.0, 1.5};
+        double[] y = {2.0, 4.0, 6.0};
+        assertThrows(DifferentLengthOfArraysException.class, () ->{new LinkedListTabulatedFunction(x1, y);});
+        assertThrows(ArrayIsNotSortedException.class, () ->{new LinkedListTabulatedFunction(x2, y);});
     }
 }

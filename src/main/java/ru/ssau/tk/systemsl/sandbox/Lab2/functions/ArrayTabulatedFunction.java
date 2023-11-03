@@ -1,4 +1,6 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Insertable, Removable{
@@ -6,16 +8,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     protected double[] yValues;
     protected int count;
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
         if (xValues.length < 2)
             throw new IllegalArgumentException("Array length < 2");
-        else if (xValues.length != yValues.length) {
-            throw new IllegalArgumentException("Sizes of arrays are different");
-        }
-        else {
-            this.xValues = Arrays.copyOf(xValues, xValues.length);
-            this.yValues = Arrays.copyOf(yValues, xValues.length);
-            this.count = xValues.length;
-        }
+        checkSorted(xValues);
+        this.xValues = Arrays.copyOf(xValues, xValues.length);
+        this.yValues = Arrays.copyOf(yValues, xValues.length);
+        this.count = xValues.length;
     }
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2)
@@ -28,7 +27,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                 xTo = xFrom + xTo;
                 xFrom = xTo - xFrom;
                 xTo = xTo - xFrom;
-            } else if (xFrom == xTo) {
+            }
+            if (xFrom == xTo) {
                 double d = (xFrom - xTo) / (count - 1);
                 double xs = xFrom;
                 double y = source.apply(xFrom);
@@ -97,18 +97,15 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return i;
     }
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1)
-            return this.yValues[0];
-        return interpolate(x, this.xValues[floorIndex], this.xValues[floorIndex+1], this.yValues[floorIndex], this.yValues[floorIndex+1]);
+        if (this.xValues[floorIndex] < x && x < this.xValues[floorIndex+1])
+            return interpolate(x, this.xValues[floorIndex], this.xValues[floorIndex+1], this.yValues[floorIndex], this.yValues[floorIndex+1]);
+        else
+            throw new InterpolationException();
     }
     protected double extrapolateLeft(double x) {
-        if (count == 1)
-            return this.yValues[0];
         return interpolate(x, this.xValues[0], this.xValues[1], this.yValues[0], this.yValues[1]);
     }
     protected double extrapolateRight(double x) {
-        if (count == 1)
-            return this.yValues[0];
         return interpolate(x, this.xValues[this.count-2], this.xValues[this.count-1], this.yValues[this.count-2], this.yValues[this.count-1]);
     }
 

@@ -1,5 +1,7 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
     private Node head;
     private int count;
@@ -25,10 +27,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length != yValues.length || xValues.length < 2) {
-            throw new IllegalArgumentException("Input arrays must have the same length and not be empty");
-        }
-
+        checkLengthIsTheSame(xValues, yValues);
+        if (xValues.length < 2)
+            throw new IllegalArgumentException("Array length < 2");
+        checkSorted(xValues);
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
@@ -205,8 +207,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         double rightX = floorNode.next.x;
         double leftY = floorNode.y;
         double rightY = floorNode.next.y;
-
-        return interpolate(x, leftX, rightX, leftY, rightY);
+        if (leftX < x && x < rightX)
+            return interpolate(x, leftX, rightX, leftY, rightY);
+        else
+            throw new InterpolationException();
     }
 
     protected double extrapolateLeft(double x) {

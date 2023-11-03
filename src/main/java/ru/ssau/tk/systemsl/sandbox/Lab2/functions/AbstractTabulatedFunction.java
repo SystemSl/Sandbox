@@ -1,5 +1,8 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
+
 public abstract class AbstractTabulatedFunction implements TabulatedFunction{
     protected abstract int floorIndexOfX(double x);
     protected abstract double extrapolateLeft(double x);
@@ -16,5 +19,14 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction{
         else if (indexOfX(x) != -1)
             return getY(indexOfX(x));
         return interpolate(x, floorIndexOfX(x));
+    }
+    static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
+        if (xValues.length != yValues.length) throw new DifferentLengthOfArraysException("Arrays have different length.");
+    }
+    static void checkSorted(double[] xValues) {
+        int i = 1;
+        while (i < xValues.length) {
+            if (xValues[i] <= xValues[(i++)-1]) throw new ArrayIsNotSortedException("Array is not sorted.");
+        }
     }
 }

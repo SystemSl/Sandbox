@@ -1,6 +1,8 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
 import org.junit.jupiter.api.Test;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -198,7 +200,7 @@ class ArrayTabulatedFunctionTest {
     void eq() {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
-        double[] x1 = {2, 2, 3, 4};
+        double[] x1 = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
         ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
         ArrayTabulatedFunction c = new ArrayTabulatedFunction(x1, y);
@@ -214,7 +216,7 @@ class ArrayTabulatedFunctionTest {
     void hC() {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
-        double[] x1 = {2, 2, 3, 4};
+        double[] x1 = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
         ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
         ArrayTabulatedFunction c = new ArrayTabulatedFunction(x1, y);
@@ -265,5 +267,14 @@ class ArrayTabulatedFunctionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             function.floorIndexOfX(0.5);
         });
+    }
+
+    @Test
+    public void ConstructorException() {
+        double[] x1 = {1.0, 2.0, 3.0, 4.0};
+        double[] x2 = {1.0, 2.0, 1.5};
+        double[] y = {2.0, 4.0, 6.0};
+        assertThrows(DifferentLengthOfArraysException.class, () ->{new ArrayTabulatedFunction(x1, y);});
+        assertThrows(ArrayIsNotSortedException.class, () ->{new ArrayTabulatedFunction(x2, y);});
     }
 }
