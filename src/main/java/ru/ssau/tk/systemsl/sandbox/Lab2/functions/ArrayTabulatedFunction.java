@@ -50,21 +50,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return this.count;
     }
     public double getX(int index) {
-        if (index >= count || index < 0)
-            throw new IllegalArgumentException("Index not in array.");
-        else
             return this.xValues[index];
     }
     public double getY(int index) {
-        if (index >= count || index < 0)
-            throw new IllegalArgumentException("Index not in array.");
-        else
             return this.yValues[index];
     }
     public void setY(int index, double value) {
-        if (index >= count || index < 0)
-            throw new IllegalArgumentException("Index not in array.");
-        else
             this.yValues[index] = value;
     }
 
@@ -96,7 +87,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     }
     protected int floorIndexOfX(double x) {
         if (x < leftBound())
-            return 0;
+            throw new IllegalArgumentException("x is less than the left boundary");
         else if (x > rightBound())
             return this.count;
         int i = 0;
@@ -138,8 +129,11 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                 xValues = newXValues;
                 yValues = newYValues;
             }
-
-            int insertionIndex = floorIndexOfX(x);
+            int insertionIndex;
+            if (x < xValues[0] )
+                insertionIndex = 0;
+            else
+                insertionIndex = floorIndexOfX(x);
 
             System.arraycopy(xValues, insertionIndex, xValues, insertionIndex + 1, count - insertionIndex);
             System.arraycopy(yValues, insertionIndex, yValues, insertionIndex + 1, count - insertionIndex);
@@ -151,9 +145,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
     }
     public void remove(int index) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Index is out of bounds");
-        }
         if (count > 1) {
             System.arraycopy(xValues, index + 1, xValues, index, count - index - 1);
             System.arraycopy(yValues, index + 1, yValues, index, count - index - 1);

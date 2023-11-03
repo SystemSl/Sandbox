@@ -61,7 +61,6 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(1, function.floorIndexOfX(1.5));
         assertEquals(2, function.floorIndexOfX(2.5));
         assertEquals(4, function.floorIndexOfX(3.5));
-        assertEquals(0, function.floorIndexOfX(-1.0));
         assertEquals(0, function.floorIndexOfX(0.5));
     }
 
@@ -249,5 +248,38 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction clonedFunction = (LinkedListTabulatedFunction) function.clone();
         assertNotSame(function, clonedFunction);
         assertEquals(function, clonedFunction);
+    }
+
+    @Test
+    public void testGetXWithInvalidIndex() {
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new double[] {1.0, 2.0, 3.0}, new double[] {2.0, 4.0, 6.0});
+        assertThrows(IllegalArgumentException.class, () -> {
+            function.getX(3);
+        });
+    }
+
+    @Test
+    public void testGetYWithInvalidIndex() {
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new double[] {1.0, 2.0, 3.0}, new double[] {2.0, 4.0, 6.0});
+        assertThrows(IllegalArgumentException.class, () -> {
+            function.getY(4);
+        });
+    }
+
+    @Test
+    public void testSetYWithInvalidIndex() {
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new double[] {1.0, 2.0, 3.0}, new double[] {2.0, 4.0, 6.0});
+        assertThrows(IllegalArgumentException.class, () -> {
+            function.setY(1, 5.0);
+            function.setY(3, 7.0);
+        });
+    }
+
+    @Test
+    public void testFloorIndexOfXWithInvalidX() {
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(new double[] {1.0, 2.0, 3.0}, new double[] {2.0, 4.0, 6.0});
+        assertThrows(IllegalArgumentException.class, () -> {
+            function.floorIndexOfX(0.5);
+        });
     }
 }

@@ -86,11 +86,13 @@ class ArrayTabulatedFunctionTest {
         assertEquals(a.floorIndexOfX(5), 4);
     }
     @Test
-    void floorIndexOfX3() {
+    void floorIndexOfXWithInvalidX() {
         double[] x = {1, 2, 3, 4};
         double[] y = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
-        assertEquals(a.floorIndexOfX(-1), 0);
+        assertThrows(IllegalArgumentException.class, () -> {
+            a.floorIndexOfX(-1.0);
+        });
     }
 
     @Test
@@ -218,5 +220,50 @@ class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction c = new ArrayTabulatedFunction(x1, y);
         assertEquals(a.hashCode(), b.hashCode());
         assertNotEquals(a.hashCode(), c.hashCode());
+    }
+
+    @Test
+    public void testGetXWithInvalidIndex() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(x, y);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            function.getX(3);
+        });
+    }
+
+    @Test
+    public void testGetYWithInvalidIndex() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(x, y);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            function.getY(4);
+        });
+    }
+
+    @Test
+    public void testSetYWithInvalidIndex() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(x, y);
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            function.setY(1, 5.0);
+            function.setY(3, 7.0);
+        });
+    }
+
+    @Test
+    public void testFloorIndexOfXWithInvalidX() {
+        double[] x = {1.0, 2.0, 3.0};
+        double[] y = {2.0, 4.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(x, y);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            function.floorIndexOfX(0.5);
+        });
     }
 }
