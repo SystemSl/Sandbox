@@ -5,15 +5,15 @@ import ru.ssau.tk.systemsl.sandbox.Lab2.functions.*;
 public interface TabulatedFunctionFactory {
     TabulatedFunction create(double[] xValues, double[] yValues);
 
-    /*default TabulatedFunction createStrict(double[] xValues, double[] yValues) {
-        TabulatedFunction function = create(xValues, yValues);
-        return new StrictTabulatedFunction(function);
-    }*/
+    default TabulatedFunction createStrict(double[] xValues, double[] yValues) {
+        return new StrictTabulatedFunction(create(xValues, yValues));
+    }
 
-    //def create Unmodif()
+    default TabulatedFunction createUnmodifiable(double[] xValues, double[] yValues) {
+        return new UnmodifiableTabulatedFunction(create(xValues, yValues));
+    }
 
-    /*default TabulatedFunction createStrictUnmodifiable(double[] xValues, double[] yValues) {
-        TabulatedFunction strictFunction = createStrict(xValues, yValues);
-        return new UnmodifiableTabulatedFunction(strictFunction);
-    }*/
+    default TabulatedFunction createStrictUnmodifiable(double[] xValues, double[] yValues) {
+        return new UnmodifiableTabulatedFunction(createStrict(xValues, yValues));
+    }
 }
