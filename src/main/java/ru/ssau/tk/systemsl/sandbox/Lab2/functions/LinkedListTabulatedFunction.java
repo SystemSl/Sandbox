@@ -25,7 +25,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length != yValues.length || xValues.length == 0) {
+        if (xValues.length != yValues.length || xValues.length < 2) {
             throw new IllegalArgumentException("Input arrays must have the same length and not be empty");
         }
 
@@ -87,14 +87,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public double getX(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         return getNode(index).x;
     }
 
     public double getY(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         return getNode(index).y;
     }
 
     public void setY(int index, double value) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Index is out of bounds");
+        }
         getNode(index).y = value;
     }
 
@@ -162,8 +171,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     protected int floorIndexOfX(double x) {
-        if (x < leftBound())
-            return 0;
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("x is less than the left boundary");
+        }
         else if (x > rightBound())
             return count;
         int i = 0;
@@ -258,6 +268,9 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     private Node floorNodeOfX(double x) {
+        if (x < leftBound()) {
+            throw new IllegalArgumentException("x is less than the left boundary");
+        }
         Node currentNode = head;
 
         for (int i = 0; i < count; i++) {

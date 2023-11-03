@@ -6,8 +6,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
     protected double[] yValues;
     protected int count;
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        if (xValues.length == 0)
-            throw new IllegalArgumentException("Array is empty");
+        if (xValues.length < 2)
+            throw new IllegalArgumentException("Array length < 2");
         else if (xValues.length != yValues.length) {
             throw new IllegalArgumentException("Sizes of arrays are different");
         }
@@ -18,8 +18,8 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         }
     }
     public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        if (count <= 0)
-            throw new IllegalArgumentException("Size <= 0");
+        if (count < 2)
+            throw new IllegalArgumentException("Size < 2");
         else {
             this.count = count;
             this.xValues = new double[count];
