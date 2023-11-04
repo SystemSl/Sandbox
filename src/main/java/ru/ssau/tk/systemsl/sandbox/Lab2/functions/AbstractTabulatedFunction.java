@@ -3,7 +3,14 @@ package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.DifferentLengthOfArraysException;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction{
+import java.io.Serial;
+import java.io.Serializable;
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -6030744339129575121L;
+
     protected abstract int floorIndexOfX(double x);
     protected abstract double extrapolateLeft(double x);
     protected abstract double extrapolateRight(double x);
