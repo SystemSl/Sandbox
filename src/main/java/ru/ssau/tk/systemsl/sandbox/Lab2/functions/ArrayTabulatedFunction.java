@@ -1,11 +1,16 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Insertable, Removable{
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Insertable, Removable, Serializable {
+    @Serial
+    private static final long serialVersionUID = -6030744339129575121L;
     protected double[] xValues;
     protected double[] yValues;
     protected int count;
