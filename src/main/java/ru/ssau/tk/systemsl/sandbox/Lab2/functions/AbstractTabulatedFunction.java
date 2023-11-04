@@ -7,9 +7,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
-
     @Serial
-    private static final long serialVersionUID = -6030744339129575121L;
+    private static final long serialVersionUID = -4102961108545481362L;
 
     protected abstract int floorIndexOfX(double x);
     protected abstract double extrapolateLeft(double x);
