@@ -50,4 +50,9 @@ public final class FunctionsIO {
         }
         return factory.create(xValues, yValues);
     }
+    public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
+        ObjectOutputStream objstream = new ObjectOutputStream(stream);
+        objstream.writeObject(function);
+        stream.flush();
+    }
 }
