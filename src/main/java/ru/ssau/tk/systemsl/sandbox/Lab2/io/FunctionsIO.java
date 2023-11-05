@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
+import com.thoughtworks.xstream.XStream;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.*;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.factory.*;
 
@@ -11,13 +12,13 @@ public final class FunctionsIO {
     private FunctionsIO() {
         throw new UnsupportedOperationException();
     }
-    public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) {
+    public static void writeTabulatedFunction(BufferedWriter writer, TabulatedFunction function) throws IOException {
         PrintWriter printwriter = new PrintWriter(writer);
         printwriter.println(function.getCount());
         for (Point point : function) {
             printwriter.printf("%f %f\n", point.x, point.y);
         }
-        printwriter.flush();
+        writer.flush();
     }
 
     public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
@@ -58,5 +59,15 @@ public final class FunctionsIO {
     public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException{
         ObjectInputStream objstream = new ObjectInputStream(stream);
         return (TabulatedFunction) objstream.readObject();
+    }
+    public static void serializeXml(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
+        XStream xs = new XStream();
+        writer.write(xs.toXML(function));
+        writer.flush();
+    }
+    public static ArrayTabulatedFunction deserializeXml(BufferedReader reader) {
+        XStream xs = new XStream();
+        xs.allowTypes(new Class[]{ArrayTabulatedFunction.class});
+        return (ArrayTabulatedFunction) xs.fromXML(reader);
     }
 }
