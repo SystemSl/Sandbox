@@ -1,12 +1,6 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.io;
 
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.ArrayTabulatedFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.SqrFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.TabulatedFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.factory.ArrayTabulatedFunctionFactory;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.factory.LinkedListTabulatedFunctionFactory;
-import ru.ssau.tk.systemsl.sandbox.Lab2.operations.TabulatedDifferentialOperator;
 
 import java.io.*;
 
