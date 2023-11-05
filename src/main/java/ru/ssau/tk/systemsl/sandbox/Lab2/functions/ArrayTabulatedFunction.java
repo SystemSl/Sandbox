@@ -44,7 +44,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
                     this.xValues[i] = xs;
                 }
             } else {
-                double d = (xFrom - xTo) / (count - 1);
+                double d = (xTo - xFrom) / (count - 1);
                 double xs = xFrom;
                 for (int i = 0; i < count; i++, xs += d) {
                     this.yValues[i] = source.apply(xs);
