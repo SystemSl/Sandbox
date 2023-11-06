@@ -66,7 +66,12 @@ public class TabulatedFunctionOperationService {
     }
 
     public TabulatedFunction Division(TabulatedFunction a, TabulatedFunction b) {
-        BiOperation op = (u, v) -> u / v;
+        BiOperation op = (u, v) -> {
+            if (v == 0) {
+                throw new ArithmeticException("Division by zero isn't allowed");
+            }
+            return u / v;
+        };
         return doOperation(a, b, op);
     }
 }
