@@ -70,4 +70,34 @@ public final class FunctionsIO {
         xs.allowTypes(new Class[]{ArrayTabulatedFunction.class});
         return (ArrayTabulatedFunction) xs.fromXML(reader);
     }
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream dataoutputstream = new DataOutputStream(outputStream);
+        dataoutputstream.writeInt(function.getCount());
+        for (Point point : function) {
+            dataoutputstream.writeDouble(point.x);
+            dataoutputstream.writeDouble(point.y);
+        }
+        outputStream.flush();
+    }
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+        DataInputStream datainputstream = new DataInputStream(inputStream);
+        int count = 0;
+        try {
+            count = datainputstream.readInt();
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int i = 0; i < count; i++) {
+            double x = 0;
+            double y = 0;
+            x = datainputstream.readDouble();
+            y = datainputstream.readDouble();
+            xValues[i] = x;
+            yValues[i] = y;
+        }
+        return factory.create(xValues, yValues);
+    }
 }
