@@ -6,6 +6,7 @@ import ru.ssau.tk.systemsl.sandbox.Lab2.functions.UnitFunction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Vector;
 
 public class MultiplyingTaskExecutor {
     public static void main(String[] args) throws InterruptedException {
@@ -17,6 +18,13 @@ public class MultiplyingTaskExecutor {
         }
         for (Thread th : list) {
             th.start();
+        }
+        Vector<Thread> vec_with_active_threads = new Vector<>(list);
+        while (!vec_with_active_threads.isEmpty()) {
+            for (int i = 0; i < vec_with_active_threads.size(); i++) {
+                if (!vec_with_active_threads.get(i).isAlive())
+                    vec_with_active_threads.remove(i--);
+            }
         }
         Thread.sleep(10);
         System.out.println(ll);
