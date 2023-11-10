@@ -111,15 +111,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         getNode(index).y = value;
     }
 
-    @Override
-    public String toString() {
-        Node node = head.next;
-        String ans = head.toString();
-        for (int i = 1; i < this.count; i++, node = node.next) {
-            ans += " " + node.toString();
-        }
-        return ans;
-    }
+//    @Override
+//    public String toString() {
+//        Node node = head.next;
+//        String ans = head.toString();
+//        for (int i = 1; i < this.count; i++, node = node.next) {
+//            ans += " " + node.toString();
+//        }
+//        return ans;
+//    }
 
     @Override
     public boolean equals(Object o) {
