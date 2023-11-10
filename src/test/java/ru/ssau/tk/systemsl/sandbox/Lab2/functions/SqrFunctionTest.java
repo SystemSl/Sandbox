@@ -9,6 +9,6 @@ class SqrFunctionTest {
     @Test
     void apply() {
         SqrFunction a = new SqrFunction();
-        assertEquals(a.apply(2),4);
+        assertEquals(a.apply(2), 4);
     }
 }
