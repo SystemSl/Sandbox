@@ -17,7 +17,7 @@ class FunctionsIOTest {
     private final ArrayTabulatedFunctionFactory factory = new ArrayTabulatedFunctionFactory();
     private final ArrayTabulatedFunction a = new ArrayTabulatedFunction(new double[]{1, 2, 3, 4}, new double[]{2, 3, 4, 5});
     @Test
-    void writeTabulatedFunctionTest() {
+    void writeTabulatedFunctionTestTXT() {
         try(FileWriter fw_a = new FileWriter("temp/array_function.txt")) {
             BufferedWriter bfw_a = new BufferedWriter(fw_a);
             FunctionsIO.writeTabulatedFunction(bfw_a, a);
@@ -27,7 +27,7 @@ class FunctionsIOTest {
         }
     }
     @Test
-    void readTabulatedFunctionTest() {
+    void readTabulatedFunctionTestTXT() {
         try(FileWriter fw_a = new FileWriter("temp/array_function.txt")) {
             BufferedWriter bfw_a = new BufferedWriter(fw_a);
             FunctionsIO.writeTabulatedFunction(bfw_a, a);
@@ -99,6 +99,35 @@ class FunctionsIOTest {
             BufferedReader bfr_a = new BufferedReader(fr_a);
             ArrayTabulatedFunction b = FunctionsIO.deserializeXml(bfr_a);
             assertEquals(a, b);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+    }
+    @Test
+    void writeTabulatedFunctionTestBIN() {
+        try(FileOutputStream fos = new FileOutputStream("temp/array_function.bin")) {
+            BufferedOutputStream outputStream = new BufferedOutputStream(fos);
+            FunctionsIO.writeTabulatedFunction(outputStream, a);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+    }
+    @Test
+    void readTabulatedFunctionTestBIN() {
+        try(FileOutputStream fos = new FileOutputStream("temp/array_function.bin")) {
+            BufferedOutputStream outputStream = new BufferedOutputStream(fos);
+            FunctionsIO.writeTabulatedFunction(outputStream, a);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+        try(FileInputStream fis = new FileInputStream("temp/array_function.bin")) {
+            BufferedInputStream bfr_a = new BufferedInputStream(fis);
+            ArrayTabulatedFunctionFactory atff = new ArrayTabulatedFunctionFactory();
+            TabulatedFunction atf = FunctionsIO.readTabulatedFunction(bfr_a, atff);
+            assertEquals(a, atf);
         }
         catch (IOException er) {
             er.printStackTrace();
