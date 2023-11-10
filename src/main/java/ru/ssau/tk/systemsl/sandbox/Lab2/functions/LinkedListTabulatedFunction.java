@@ -54,7 +54,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             throw new IllegalArgumentException("Count must be at least 2");
         }
 
-        this.count = count;
         head = null;
 
         double step = (xTo - xFrom) / (count - 1);
@@ -238,8 +237,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return interpolate(x, xN1, xN, yN1, yN);
     }
 
-     static class Node {
-        public Node next;
+     static class Node implements Serializable{
+         @Serial
+         private static final long serialVersionUID = -9001198175307600280L;
+         public Node next;
         public Node prev;
         public double x;
         public double y;
