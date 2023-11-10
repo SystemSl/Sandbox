@@ -18,7 +18,7 @@ public class MultiplyingTaskExecutor {
         for (Thread th : list) {
             th.start();
         }
-        Thread.sleep(2000);
+        Thread.sleep(10);
         System.out.println(ll);
     }
 }
