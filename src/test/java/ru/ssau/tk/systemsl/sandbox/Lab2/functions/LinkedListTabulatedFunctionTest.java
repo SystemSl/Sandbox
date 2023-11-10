@@ -212,7 +212,7 @@ public class LinkedListTabulatedFunctionTest {
 
     @Test
     void toStringTest() {
-        assertEquals("(0.0; 0.0) (1.0; 1.0) (2.0; 4.0) (3.0; 9.0)", function.toString());
+        assertEquals("LinkedListTabulatedFunction size = 4\n[0.0; 0.0]\n[1.0; 1.0]\n[2.0; 4.0]\n[3.0; 9.0]\n", function.toString());
     }
 
     @Test
