@@ -193,7 +193,7 @@ class ArrayTabulatedFunctionTest {
         double[] y = {2, 3, 4, 5};
         ArrayTabulatedFunction a = new ArrayTabulatedFunction(x, y);
         ArrayTabulatedFunction b = (ArrayTabulatedFunction) a.clone();
-        assertEquals(b.toString(), "(1.0; 2.0) (2.0; 3.0) (3.0; 4.0) (4.0; 5.0)");
+        assertEquals(b.toString(), "ArrayTabulatedFunction size = 4\n[1.0; 2.0]\n[2.0; 3.0]\n[3.0; 4.0]\n[4.0; 5.0]\n");
     }
 
     @Test

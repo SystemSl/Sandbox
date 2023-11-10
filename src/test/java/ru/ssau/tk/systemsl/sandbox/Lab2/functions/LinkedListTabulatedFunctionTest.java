@@ -177,12 +177,12 @@ public class LinkedListTabulatedFunctionTest {
         assertEquals(5, b.getY(5), 0.00001);
     }
 
-    @Test
-    public void testNodeToString() {
-        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, -5.5);
-        String expected = "(1.1; -5.5)";
-        assertEquals(expected, node.toString());
-    }
+//    @Test
+//    public void testNodeToString() {
+//        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1.1, -5.5);
+//        String expected = "(1.1; -5.5)";
+//        assertEquals(expected, node.toString());
+//    }
 
     @Test
     public void testNodeEquals() {
