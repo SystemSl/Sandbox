@@ -4,6 +4,8 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thoughtworks.xstream.XStream;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.*;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.factory.*;
@@ -99,5 +101,14 @@ public final class FunctionsIO {
             yValues[i] = y;
         }
         return factory.create(xValues, yValues);
+    }
+    public static void serializeJson(BufferedWriter writer, ArrayTabulatedFunction function) throws IOException {
+        ObjectMapper om = new ObjectMapper();
+        writer.write(om.writeValueAsString(function));
+        writer.flush();
+    }
+    public static ArrayTabulatedFunction deserializeJson(BufferedReader reader) throws IOException {
+        ObjectMapper om = new ObjectMapper();
+        return om.readerFor(ArrayTabulatedFunction.class).readValue(reader);
     }
 }

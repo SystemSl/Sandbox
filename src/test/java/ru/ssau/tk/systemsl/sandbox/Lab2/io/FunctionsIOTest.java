@@ -133,6 +133,34 @@ class FunctionsIOTest {
             er.printStackTrace();
         }
     }
+    @Test
+    void SerializationJsonTest() {
+        try(FileWriter fw_a = new FileWriter("temp/serialized_xml_array_function.xml")) {
+            BufferedWriter bfw_a = new BufferedWriter(fw_a);
+            FunctionsIO.serializeJson(bfw_a, a);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+    }
+    @Test
+    void DeserializationJsonTest() {
+        try(FileWriter fw_a = new FileWriter("temp/serialized_xml_array_function.xml")) {
+            BufferedWriter bfw_a = new BufferedWriter(fw_a);
+            FunctionsIO.serializeJson(bfw_a, a);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+        try(FileReader fr_a = new FileReader("temp/serialized_xml_array_function.xml")) {
+            BufferedReader bfr_a = new BufferedReader(fr_a);
+            ArrayTabulatedFunction b = FunctionsIO.deserializeJson(bfr_a);
+            assertEquals(a, b);
+        }
+        catch (IOException er) {
+            er.printStackTrace();
+        }
+    }
     @AfterAll
     public static void after(){
         File dir = new File("temp");
