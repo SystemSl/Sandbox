@@ -4,7 +4,7 @@ import ru.ssau.tk.systemsl.sandbox.Lab2.functions.ConstantFunction;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.LinkedListTabulatedFunction;
 
 public class ReadWriteTaskExecutor {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         LinkedListTabulatedFunction ll = new LinkedListTabulatedFunction(new ConstantFunction(-1), 1, 1000, 1000);
         Thread t1 = new Thread(new ReadTask(ll));
         Thread t2 = new Thread(new WriteTask(ll, 0.5));
