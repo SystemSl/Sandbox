@@ -239,10 +239,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         public double x;
         public double y;
 
-        @Override
-        public String toString() {
-            return ("("+ x + "; " + y + ")");
-        }
+//        @Override
+//        public String toString() {
+//            return ("("+ x + "; " + y + ")");
+//        }
 
         @Override
         public boolean equals(Object o) {

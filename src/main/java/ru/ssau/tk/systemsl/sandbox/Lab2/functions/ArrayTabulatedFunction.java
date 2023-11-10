@@ -173,14 +173,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         return y;
     }
 
-    @Override
-    public String toString() {
-        String ans = "("+ this.xValues[0] + "; " + this.yValues[0] + ")";
-        for (int i = 1; i < this.count; i++) {
-            ans += " (" + this.xValues[i] + "; " + this.yValues[i] + ")";
-        }
-        return ans;
-    }
+//    @Override
+//    public String toString() {
+//        String ans = "("+ this.xValues[0] + "; " + this.yValues[0] + ")";
+//        for (int i = 1; i < this.count; i++) {
+//            ans += " (" + this.xValues[i] + "; " + this.yValues[i] + ")";
+//        }
+//        return ans;
+//    }
 
     @Override
     public boolean equals(Object o) {
