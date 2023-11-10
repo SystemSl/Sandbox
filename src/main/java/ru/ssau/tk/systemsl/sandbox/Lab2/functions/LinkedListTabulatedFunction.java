@@ -1,10 +1,15 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.functions;
 
 import ru.ssau.tk.systemsl.sandbox.Lab2.exceptions.InterpolationException;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable, Serializable {
+    @Serial
+    private static final long serialVersionUID = -2586555030144983927L;
     private Node head;
     private int count;
 
