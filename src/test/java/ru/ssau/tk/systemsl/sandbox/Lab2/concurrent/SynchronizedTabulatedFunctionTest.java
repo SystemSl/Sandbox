@@ -2,7 +2,14 @@ package ru.ssau.tk.systemsl.sandbox.Lab2.concurrent;
 
 import org.junit.jupiter.api.Test;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.ArrayTabulatedFunction;
+import ru.ssau.tk.systemsl.sandbox.Lab2.functions.LinkedListTabulatedFunction;
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.Point;
+import ru.ssau.tk.systemsl.sandbox.Lab2.functions.UnitFunction;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -26,7 +26,6 @@ public class MultiplyingTaskExecutor {
                     vec_with_active_threads.remove(i--);
             }
         }
-        Thread.sleep(10);
         System.out.println(ll);
     }
 }
