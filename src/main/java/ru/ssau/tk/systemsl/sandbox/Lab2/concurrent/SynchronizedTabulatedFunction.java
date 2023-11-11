@@ -6,6 +6,7 @@ import ru.ssau.tk.systemsl.sandbox.Lab2.operations.TabulatedFunctionOperationSer
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.concurrent.SynchronousQueue;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
     public final TabulatedFunction function;
@@ -102,6 +103,14 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
                         throw new NoSuchElementException();
                 }
             };
+        }
+    }
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction function);
+    }
+    public <T> T doSynchronously(Operation<T> operation) {
+        synchronized (mutex) {
+            return operation.apply(new SynchronizedTabulatedFunction(function));
         }
     }
 }

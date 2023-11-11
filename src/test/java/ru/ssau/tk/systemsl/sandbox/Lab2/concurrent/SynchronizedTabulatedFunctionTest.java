@@ -1,10 +1,7 @@
 package ru.ssau.tk.systemsl.sandbox.Lab2.concurrent;
 
 import org.junit.jupiter.api.Test;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.ArrayTabulatedFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.LinkedListTabulatedFunction;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.Point;
-import ru.ssau.tk.systemsl.sandbox.Lab2.functions.UnitFunction;
+import ru.ssau.tk.systemsl.sandbox.Lab2.functions.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -71,6 +68,65 @@ class SynchronizedTabulatedFunctionTest {
         for (Point point : syn_a) {
             assertEquals(x[i], point.x);
             assertEquals(y[i++], point.y);
+        }
+    }
+
+    @Test
+    void Operation_Multithreaded_Test() {
+        ArrayTabulatedFunction array = new ArrayTabulatedFunction(new UnitFunction(), 1, 1000, 1000);
+        SynchronizedTabulatedFunction syn_a = new SynchronizedTabulatedFunction(array);
+        SynchronizedTabulatedFunction.Operation<Void> a = function -> {
+            int i = 0;
+            for (Point p : syn_a) {
+                syn_a.setY(i++, p.y+1);
+            }
+            System.out.println("Operation complete");
+            return null;
+        };
+        List<Thread> list = new ArrayList<>();
+        int number_of_iterations = 10;
+        for (int i = 0; i < number_of_iterations; i++) {
+            list.add(new Thread(new MultiplyingTask(syn_a)));
+        }
+        for (Thread th : list) {
+            th.start();
+        }
+        Vector<Thread> vec_with_active_threads = new Vector<>(list);
+        syn_a.doSynchronously(a);
+        System.out.println();
+        while (!vec_with_active_threads.isEmpty()) {
+            for (int i = 0; i < vec_with_active_threads.size(); i++) {
+                if (!vec_with_active_threads.get(i).isAlive())
+                    vec_with_active_threads.remove(i--);
+            }
+        }
+        for (Point p : syn_a) {
+            System.out.printf("[%f, %f]\n", p.x, p.y);
+        }
+    }
+    @Test
+    void Operation_Single_thread_Test() {
+        SynchronizedTabulatedFunction.Operation<Void> op = function -> {
+            int i = 0;
+            for (Point p : syn_a) {
+                syn_a.setY(i++, p.y+1);
+            }
+            return null;
+        };
+        SynchronizedTabulatedFunction.Operation<double[]> op1 = function -> {
+            double[] y_val = new double[4];
+            int i = 0;
+            for (Point p : syn_a) {
+                y_val[i++] = p.y;
+            }
+            return y_val;
+        };
+        syn_a.doSynchronously(op);
+        double[] y_val = syn_a.doSynchronously(op1);
+        int i = 0;
+        for (Point p : syn_a) {
+            assertEquals(y[i] + 1, p.y);
+            assertEquals(y_val[i++], p.y);
         }
     }
 }
