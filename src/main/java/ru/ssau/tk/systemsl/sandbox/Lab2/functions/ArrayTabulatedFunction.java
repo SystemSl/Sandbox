@@ -142,8 +142,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
             int insertionIndex;
             if (x < xValues[0] )
                 insertionIndex = 0;
-            else
+            else if (x > xValues[this.getCount() - 1])
                 insertionIndex = floorIndexOfX(x);
+            else
+                insertionIndex = floorIndexOfX(x) + 1;
 
             System.arraycopy(xValues, insertionIndex, xValues, insertionIndex + 1, count - insertionIndex);
             System.arraycopy(yValues, insertionIndex, yValues, insertionIndex + 1, count - insertionIndex);
