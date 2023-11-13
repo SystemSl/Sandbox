@@ -48,24 +48,7 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
             syn_function = new SynchronizedTabulatedFunction(function);
         else
             syn_function = (SynchronizedTabulatedFunction) function;
-        SynchronizedTabulatedFunction.Operation<SynchronizedTabulatedFunction> sync_derive = syn_func -> {
-            int count = syn_func.getCount();
-            Point[] points = TabulatedFunctionOperationService.asPoints(syn_func);
-            double[] xValues = new double[count];
-            double[] yValues = new double[count];
-
-            int i = 0;
-            while (i < count - 1) {
-                xValues[i] = points[i].x;
-                yValues[i] = (points[i + 1].y - points[i].y) / (points[i + 1].x - points[i].x);
-                i++;
-            }
-
-            xValues[i] = points[i].x;
-            yValues[i] = yValues[i - 1];
-
-            return new SynchronizedTabulatedFunction(factory.create(xValues, yValues));
-        };
-        return syn_function.doSynchronously(sync_derive);
+        return syn_function.doSynchronously(syn_func -> {
+            return new SynchronizedTabulatedFunction(this.derive(syn_function));});
     }
 }
