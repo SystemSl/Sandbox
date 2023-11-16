@@ -18,7 +18,7 @@ public class IntegrateSectorTask implements Callable<Double> {
         double y2 = function.getY(function.indexOfX(x2));
         if ((y1 >= 0) != (y2 >=0)) {
             double x0 = (-y1/(y2-y1))*(x2-x1)+x1;
-            return (Math.abs((y1/2)*(x2-x1)) + Math.abs((y2/2)*(x2-x1)));
+            return (Math.abs((y1/2)*(x0-x1)) + Math.abs((y2/2)*(x2-x0)));
         }
         return Math.abs(((y1+y2)/2)*(x2-x1));
     }

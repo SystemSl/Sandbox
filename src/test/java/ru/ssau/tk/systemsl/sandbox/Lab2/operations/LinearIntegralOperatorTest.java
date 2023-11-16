@@ -11,8 +11,8 @@ class LinearIntegralOperatorTest {
 
     @Test
     void integrate() throws InterruptedException, ExecutionException {
-        ArrayTabulatedFunction ar = new ArrayTabulatedFunction(new double[]{-1, 0, 3, 6, 9, 12}, new double[] {-1, 0, 1, 1, 2, 2});
+        ArrayTabulatedFunction ar = new ArrayTabulatedFunction(new double[]{-3, 3, 6, 9, 12}, new double[] {-1, 1, 1, 2, 2});
         LinearIntegralOperator op = new LinearIntegralOperator();
-        assertEquals(15.5 , op.integrate(ar));
+        assertEquals(16.5 , op.integrate(ar));
     }
 }
