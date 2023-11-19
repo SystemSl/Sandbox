@@ -6,16 +6,18 @@ import java.util.concurrent.Callable;
 
 public class IntegrateSectorTask implements Callable<Double> {
     final TabulatedFunction function;
-    final double x1;
-    final double x2;
-    public IntegrateSectorTask(TabulatedFunction function, double x1, double x2) {
+    final int i1;
+    final int i2;
+    public IntegrateSectorTask(TabulatedFunction function, int i1, int i2) {
         this.function = function;
-        this.x1 = x1;
-        this.x2 = x2;
+        this.i1 = i1;
+        this.i2 = i2;
     }
     public Double call() {
-        double y1 = function.getY(function.indexOfX(x1));
-        double y2 = function.getY(function.indexOfX(x2));
+        double x1 = function.getX(i1);
+        double x2 = function.getX(i2);
+        double y1 = function.getY(i1);
+        double y2 = function.getY(i2);
         if ((y1 >= 0) != (y2 >=0)) {
             double x0 = (-y1/(y2-y1))*(x2-x1)+x1;
             return (Math.abs((y1/2)*(x0-x1)) + Math.abs((y2/2)*(x2-x0)));
