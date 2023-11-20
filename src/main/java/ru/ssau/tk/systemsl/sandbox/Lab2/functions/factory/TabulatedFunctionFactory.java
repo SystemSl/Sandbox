@@ -2,8 +2,12 @@ package ru.ssau.tk.systemsl.sandbox.Lab2.functions.factory;
 
 import ru.ssau.tk.systemsl.sandbox.Lab2.functions.*;
 
+import java.util.regex.Matcher;
+
 public interface TabulatedFunctionFactory {
     TabulatedFunction create(double[] xValues, double[] yValues);
+
+    TabulatedFunction create(MathFunction source, double xFrom, double xTo, int count);
 
     default TabulatedFunction createStrict(double[] xValues, double[] yValues) {
         return new StrictTabulatedFunction(create(xValues, yValues));
