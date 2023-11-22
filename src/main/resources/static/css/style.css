@@ -1,7 +1,46 @@
 .allcards {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    justify-content: space-around;
+    justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
+}
+.modal-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.modal-container-create-using-table {
+    opacity: 0;
+}
+.modal-container-create-using-function {
+    opacity: 0;
+}
+.modal-container-element-wise-operations {
+    opacity: 0;
+}
+.modal-container-differentiation {
+    opacity: 0;
+}
+.modal-container-integral {
+    opacity: 0;
+}
+.modal-container-settings {
+    opacity: 0;
+}
+.show {
+    pointer-events: auto;
+    opacity: 1;
+}
+.modal_main {
+    background-color: white;
+    width: 80%;
+    max-width: 100%;
+    padding: 20px 20px 20px 20px;
 }
