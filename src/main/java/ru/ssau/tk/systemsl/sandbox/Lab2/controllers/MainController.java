@@ -36,7 +36,7 @@ public class MainController {
     private TabulatedFunctionFactory fac = new ArrayTabulatedFunctionFactory();
 
     private double[] ParseString(String str) throws java.text.ParseException {
-        NumberFormat nf = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+        NumberFormat nf = NumberFormat.getInstance(Locale.US);
         String[] a = str.split(" ");
         double[] vals = new double[a.length];
         for (int i = 0; i < a.length; i++)
@@ -50,15 +50,12 @@ public class MainController {
         return "tabulatedfunction";
     }
 
-//    @PostMapping("/")
-//    public String AmountPostAdd(@RequestBody Double[] xValues, Model model) {
-//        System.out.println(xValues[0]);
-//        return "redirect:/";
-//    }
     @PostMapping("/")
     public String controllerMethod(HttpServletRequest hsr) throws ParseException {
         String xValues_table = hsr.getParameter("xValues_table");
         String yValues_table = hsr.getParameter("yValues_table");
+        System.out.println(xValues_table);
+        System.out.println(yValues_table);
         if (xValues_table != null) {
             xVal = ParseString(xValues_table);
         }
