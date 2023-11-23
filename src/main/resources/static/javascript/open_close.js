@@ -3,13 +3,88 @@
 const create_using_table_open = document.getElementById('create_using_table_open');
 const modal_container_create_using_table = document.getElementById('modal_container_create_using_table');
 const create_using_table_close = document.getElementById('create_using_table_close');
+const amount_submit = document.getElementById("amount_submit");
+const form_for_amount = document.getElementById("form_for_amount");
+const input_amount = document.getElementById("input_amount");
 
 create_using_table_open.addEventListener('click', () => {
     modal_container_create_using_table.classList.add("show");
+    form_for_amount.classList.remove("vanish")
+    input_amount.value = '';
+    el1 = document.getElementById('table_created');
+    if (el1 != null)
+        el1.remove();
+    el2 = document.getElementById('create_tabulated_function_table');
+    if (el2 != null)
+        el2.remove();
+    el3 = document.getElementById('save_tabulated_function_table');
+    if (el3 != null)
+        el3.remove();
 });
 
 create_using_table_close.addEventListener('click', () => {
     modal_container_create_using_table.classList.remove("show");
+});
+
+amount_submit.addEventListener('click', () => {
+    if (input_amount.value < 2) {
+        alert("Size < 2")
+    }
+    else {
+            tbl  = document.createElement('table');
+            tbl.style.border = '1px solid black';
+
+            for(var i = 0; i < 2; i++){
+                var tr = tbl.insertRow();
+                let el, td;
+                for(var j = 0; j <= input_amount.value; j++){
+                        td = tr.insertCell();
+                        if (i == 0 && j == 0) {
+                            td.appendChild(document.createTextNode('X'));
+                        }
+                        else if (i == 1 && j == 0) {
+                            td.appendChild(document.createTextNode('Y'));
+                        }
+                        else {
+                            el = document.createElement('input');
+                            el.value = '0';
+                            el.setAttribute('type', 'number');
+                            el.setAttribute('id', `input-table-${i}-${j-1}`);
+                            td.appendChild(el);
+                        }
+                }
+            }
+            tbl.setAttribute('id', 'table_created')
+            document.getElementById("table_create").appendChild(tbl);
+            btn = document.createElement('button');
+            btn.classList.add('btn');
+            btn.classList.add('btn-success');
+            btn.classList.add('mt-3');
+            btn.setAttribute('type', 'submit');
+            btn.setAttribute('id', 'create_tabulated_function_table');
+            btn.textContent = "Confirm";
+            document.getElementById("tabulated_function_table").appendChild(btn);
+            create_tabulated_function_table = document.getElementById('create_tabulated_function_table');
+            create_tabulated_function_table.addEventListener('click', () => {
+
+                 el = document.getElementById('save_tabulated_function_table');
+                 if (el != null)
+                    el.remove();
+                 btn = document.createElement('a');
+                 btn.classList.add('btn');
+                 btn.classList.add('btn-warning');
+                 btn.classList.add('mt-3');
+                 btn.style.margin = '0px 0px 0px 10px';
+                 btn.setAttribute('th:href', '@{|/products/');
+                 btn.textContent = "Save as";
+                 document.getElementById("tabulated_function_table").appendChild(btn);
+                 table_arrays(input_amount.value);
+                 btn.addEventListener('click', () => {
+
+                 });
+            });
+        form_for_amount.classList.add("vanish");
+    }
 });
 
 // Create using function
@@ -81,3 +156,19 @@ settings_open.addEventListener('click', () => {
 settings_close.addEventListener('click', () => {
     modal_container_settings.classList.remove("show");
 });
+
+function table_arrays(amount) {
+    let xValues_table = ""
+    for (let i = 0; i < amount; i++) {
+        xValues_table += document.getElementById(`input-table-0-${i}`).value + " ";
+    }
+    let yValues_table = ""
+        for (let i = 0; i < amount; i++) {
+            yValues_table += document.getElementById(`input-table-1-${i}`).value + " ";
+        }
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {xValues_table, yValues_table}
+    })
+}

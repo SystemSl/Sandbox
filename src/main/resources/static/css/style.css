@@ -44,3 +44,15 @@
     max-width: 100%;
     padding: 20px 20px 20px 20px;
 }
+.vanish {
+    display: none;
+}
+td {
+    min-width: 50px;
+    border: 1px solid black;
+    text-align: center;
+}
+table input {
+    width: 50px;
+    text-align: center;
+}
