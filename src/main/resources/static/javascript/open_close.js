@@ -20,6 +20,9 @@ create_using_table_open.addEventListener('click', () => {
     el3 = document.getElementById('save_tabulated_function_table');
     if (el3 != null)
         el3.remove();
+    el4 = document.getElementById('static_table_created');
+    if (el4 != null)
+        el4.remove();
 });
 
 create_using_table_close.addEventListener('click', () => {
@@ -67,6 +70,28 @@ amount_submit.addEventListener('click', () => {
             create_tabulated_function_table = document.getElementById('create_tabulated_function_table');
             create_tabulated_function_table.addEventListener('click', () => {
 
+                 tbl  = document.createElement('table');
+                 tbl.style.border = '1px solid black';
+
+                 for(var i = 0; i < 2; i++){
+                    var tr = tbl.insertRow();
+                    let el, td;
+                    for(var j = 0; j <= input_amount.value; j++){
+                        td = tr.insertCell();
+                        if (i == 0 && j == 0) {
+                            td.appendChild(document.createTextNode('X'));
+                        }
+                        else if (i == 1 && j == 0) {
+                            td.appendChild(document.createTextNode('Y'));
+                        }
+                        else {
+                            td.appendChild(document.createTextNode(`${document.getElementById(`input-table-${i}-${j-1}`).value}`));
+                        }
+                    }
+                 }
+                 tbl.setAttribute('id', 'static_table_created');
+                 document.getElementById("table_create").appendChild(tbl);
+
                  el = document.getElementById('save_tabulated_function_table');
                  if (el != null)
                     el.remove();
@@ -74,14 +99,14 @@ amount_submit.addEventListener('click', () => {
                  btn.classList.add('btn');
                  btn.classList.add('btn-warning');
                  btn.classList.add('mt-3');
-                 btn.style.margin = '0px 0px 0px 10px';
-                 btn.setAttribute('th:href', '@{|/products/');
+                 btn.setAttribute('href', "/WebOutput/tabfunc_table.bin");
+                 btn.setAttribute('download', "tabulated_function.bin");
                  btn.textContent = "Save as";
+                 btn.setAttribute('id', 'save_tabulated_function_table');
                  document.getElementById("tabulated_function_table").appendChild(btn);
                  table_arrays(input_amount.value);
-                 btn.addEventListener('click', () => {
-
-                 });
+                 document.getElementById('table_created').remove();
+                 create_tabulated_function_table.remove();
             });
         form_for_amount.classList.add("vanish");
     }
@@ -163,9 +188,9 @@ function table_arrays(amount) {
         xValues_table += document.getElementById(`input-table-0-${i}`).value + " ";
     }
     let yValues_table = ""
-        for (let i = 0; i < amount; i++) {
-            yValues_table += document.getElementById(`input-table-1-${i}`).value + " ";
-        }
+    for (let i = 0; i < amount; i++) {
+        yValues_table += document.getElementById(`input-table-1-${i}`).value + " ";
+    }
     $.ajax ({
         url: "/",
         type: 'POST',
