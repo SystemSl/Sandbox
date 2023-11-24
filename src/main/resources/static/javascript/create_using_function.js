@@ -1,6 +1,6 @@
 // Create using function
 
-const funcs = ["Square function", "Identity function", "Three"];
+const funcs = ["Square function", "Identity function", "Const function"];
 funcs.sort();
 
 const create_using_function_open = document.getElementById('create_using_function_open');
@@ -22,7 +22,7 @@ create_using_function_open.addEventListener('click', () => {
     let opt = document.createElement('option');
     opt.setAttribute('selected', true);
     opt.textContent = funcs[0];
-    opt.setAttribute('value', "0");
+    opt.setAttribute('value', `${funcs[0]}`);
     sel.appendChild(opt);
     for (let i = 1; i < funcs.length; i++) {
         opt = document.createElement('option');
@@ -58,23 +58,108 @@ create_using_function_open.addEventListener('click', () => {
     form_for_create_using_function_submit.textContent = "Confirm";
     container_for_options.appendChild(form_for_create_using_function_submit);
     form_for_create_using_function_submit.addEventListener('click', () => {
-        document.getElementById("form_for_function").setAttribute('disabled', true);
-        xFromT = document.createElement('div');
-        xFromT.setAttribute('class', "mb-1 h5");
-        xFromT.textContent = `x1: ${xFrom.value}`
-        container_for_options.appendChild(xFromT);
-        xFrom.remove();
-        xToT = document.createElement('div');
-        xToT.setAttribute('class', "mb-1 h5");
-        xToT.textContent = `x2: ${xTo.value}`
-        container_for_options.appendChild(xToT);
-        xTo.remove();
-        countT = document.createElement('div');
-        countT.setAttribute('class', "mb-1 h5");
-        countT.textContent = `count: ${count.value}`
-        container_for_options.appendChild(countT);
-        count.remove();
-        form_for_create_using_function_submit.remove();
+        if ((count.value < 2) || !isInt(count.value)) {
+            alert("Incorrect count!")
+        }
+        else if (!checkUndefinedNumber(xFrom.value)) {
+            alert("Undefined x1!")
+        }
+        else if (!checkUndefinedNumber(xTo.value)) {
+            alert("Undefined x2!")
+        }
+        else if (xTo.value == xFrom.value) {
+            alert("x1 = x2!")
+        }
+        else {
+            document.getElementById("form_for_function").setAttribute('disabled', true);
+            if (document.getElementById("form_for_function").value == "Const function") {
+                form_for_create_using_function_submit.remove();
+                xFromT = document.createElement('div');
+                xFromT.setAttribute('class', "mb-1 h5");
+                xFromT.textContent = `x1: ${xFrom.value}`
+                container_for_options.appendChild(xFromT);
+                xToT = document.createElement('div');
+                xToT.setAttribute('class', "mb-1 h5");
+                xToT.textContent = `x2: ${xTo.value}`
+                container_for_options.appendChild(xToT);
+                countT = document.createElement('div');
+                countT.setAttribute('class', "mb-1 h5");
+                countT.textContent = `count: ${count.value}`
+                container_for_options.appendChild(countT);
+                document.getElementById("xFrom").classList.add("vanish");
+                document.getElementById("xTo").classList.add("vanish");
+                document.getElementById("count").classList.add("vanish");
+                c = document.createElement('input');
+                c.setAttribute('type', "number");
+                c.setAttribute('placeholder', "Input const");
+                c.setAttribute('class', "form-control mb-1 mt-1");
+                c.setAttribute('id', "c");
+                c.style.width = "150px";
+                container_for_options.appendChild(c);
+                form_for_create_using_function_submit_with_c = document.createElement('button');
+                form_for_create_using_function_submit_with_c.setAttribute('type', "submit");
+                form_for_create_using_function_submit_with_c.setAttribute('class', "btn btn-success mb-2");
+                form_for_create_using_function_submit_with_c.textContent = "Confirm";
+                container_for_options.appendChild(form_for_create_using_function_submit_with_c);
+                form_for_create_using_function_submit_with_c.addEventListener('click', () => {
+                    if (!checkUndefinedNumber(c.value)) {
+                        alert("Incorrect const!")
+                    }
+                    else {
+                        function_data_with_c();
+                        cT = document.createElement('div');
+                        cT.setAttribute('class', "mb-1 h5");
+                        cT.textContent = `const: ${document.getElementById("c").value}`
+                        container_for_options.appendChild(cT);
+                        document.getElementById("c").classList.add("vanish");
+                        el = document.getElementById('save_tabulated_function_function');
+                        if (el != null)
+                            el.remove();
+                        btn = document.createElement('a');
+                        btn.classList.add('btn');
+                        btn.classList.add('btn-warning');
+                        btn.classList.add('mt-3');
+                        btn.setAttribute('href', "/WebOutput/tabfunc_2.bin");
+                        btn.setAttribute('download', "tabulated_function.bin");
+                        btn.textContent = "Save as";
+                        btn.setAttribute('id', 'save_tabulated_function_function');
+                        container_for_options.appendChild(btn);
+                        form_for_create_using_function_submit_with_c.remove();
+                    }
+                });
+            }
+            else {
+                document.getElementById("xFrom").classList.add("vanish");
+                document.getElementById("xTo").classList.add("vanish");
+                document.getElementById("count").classList.add("vanish");
+                xFromT = document.createElement('div');
+                xFromT.setAttribute('class', "mb-1 h5");
+                xFromT.textContent = `x1: ${xFrom.value}`
+                container_for_options.appendChild(xFromT);
+                xToT = document.createElement('div');
+                xToT.setAttribute('class', "mb-1 h5");
+                xToT.textContent = `x2: ${xTo.value}`
+                container_for_options.appendChild(xToT);
+                countT = document.createElement('div');
+                countT.setAttribute('class', "mb-1 h5");
+                countT.textContent = `count: ${count.value}`
+                container_for_options.appendChild(countT);
+                function_data();
+                el = document.getElementById('save_tabulated_function_function');
+                if (el != null)
+                    el.remove();
+                btn = document.createElement('a');
+                btn.classList.add('btn');
+                btn.classList.add('btn-warning');
+                btn.classList.add('mt-3');
+                btn.setAttribute('href', "/WebOutput/tabfunc_2.bin");
+                btn.setAttribute('download', "tabulated_function.bin");
+                btn.textContent = "Save as";
+                btn.setAttribute('id', 'save_tabulated_function_function');
+                container_for_options.appendChild(btn);
+                form_for_create_using_function_submit.remove();
+            }
+        }
     });
 });
 

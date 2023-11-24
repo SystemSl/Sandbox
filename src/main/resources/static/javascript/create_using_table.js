@@ -31,7 +31,7 @@ create_using_table_close.addEventListener('click', () => {
 
 amount_submit.addEventListener('click', () => {
     if ((input_amount.value < 2) || !isInt(input_amount.value)) {
-        alert("Incorrect value!")
+        alert("Incorrect amount!")
     }
     else {
             tbl  = document.createElement('table');
@@ -95,13 +95,13 @@ amount_submit.addEventListener('click', () => {
                     document.getElementById("table_create").appendChild(tbl);
 
                     el = document.getElementById('save_tabulated_function_table');
-                    if (el != null)
+                        if (el != null)
                     el.remove();
                     btn = document.createElement('a');
                     btn.classList.add('btn');
                     btn.classList.add('btn-warning');
                     btn.classList.add('mt-3');
-                    btn.setAttribute('href', "/WebOutput/tabfunc_table.bin");
+                    btn.setAttribute('href', "/WebOutput/tabfunc_1.bin");
                     btn.setAttribute('download', "tabulated_function.bin");
                     btn.textContent = "Save as";
                     btn.setAttribute('id', 'save_tabulated_function_table');

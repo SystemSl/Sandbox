@@ -40,19 +40,30 @@ integral_close.addEventListener('click', () => {
     modal_container_integral.classList.remove("show");
 });
 
-// Settings
+function function_data() {
+    source = String(document.getElementById("form_for_function").value);
+    xFrom = String(document.getElementById("xFrom").value);
+    xTo = String(document.getElementById("xTo").value);
+    count = String(document.getElementById("count").value);
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source, xFrom, xTo, count}
+    });
+}
 
-const settings_open = document.getElementById('settings_open');
-const modal_container_settings = document.getElementById('modal_container_settings');
-const settings_close = document.getElementById('settings_close');
-
-settings_open.addEventListener('click', () => {
-    modal_container_settings.classList.add("show");
-});
-
-settings_close.addEventListener('click', () => {
-    modal_container_settings.classList.remove("show");
-});
+function function_data_with_c() {
+    source = document.getElementById("form_for_function").value;
+    xFrom = document.getElementById("xFrom").value;
+    xTo = document.getElementById("xTo").value;
+    count = document.getElementById("count").value;
+    c = document.getElementById("c").value;
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source, xFrom, xTo, count, c}
+    });
+}
 
 function table_arrays(amount) {
     let xValues = new Array(amount);
