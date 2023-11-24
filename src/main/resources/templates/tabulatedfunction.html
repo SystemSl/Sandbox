@@ -16,20 +16,22 @@
         <div th:insert="~{blocks/cards :: card2}"></div>
         <div th:insert="~{blocks/cards :: card3}"></div>
         <div th:insert="~{blocks/cards :: card4}"></div>
-        <div th:insert="~{blocks/cards :: card5}"></div>
-        <div th:insert="~{blocks/settings :: settings_for_factory}"></div>
-        <div th:insert="~{blocks/modals :: create_using_table}"></div>
-        <div th:insert="~{blocks/modals :: create_using_function}"></div>
-        <div th:insert="~{blocks/modals :: element_wise_operations}"></div>
-        <div th:insert="~{blocks/modals :: differentiation}"></div>
-        <div th:insert="~{blocks/modals :: integral}"></div>
-        <div th:insert="~{blocks/modals :: settings}"></div>
     </div>
+    <div th:insert="~{blocks/settings :: settings_for_factory}"></div>
+    <div th:insert="~{blocks/modals :: create_using_table}"></div>
+    <div th:insert="~{blocks/modals :: create_using_function}"></div>
+    <div th:insert="~{blocks/modals :: element_wise_operations}"></div>
+    <div th:insert="~{blocks/modals :: element_wise_operand_1}"></div>
+    <div th:insert="~{blocks/modals :: element_wise_operand_2}"></div>
+    <div th:insert="~{blocks/modals :: differentiation}"></div>
+    <div th:insert="~{blocks/modals :: settings}"></div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script th:src="@{/javascript/main.js}"></script>
 <script th:src="@{/javascript/create_using_table.js}"></script>
 <script th:src="@{/javascript/create_using_function.js}"></script>
+<script th:src="@{/javascript/operand_1.js}"></script>
+<script th:src="@{/javascript/operand_2.js}"></script>
 <script th:src="@{/javascript/settings.js}"></script>
 </body>
 </html>

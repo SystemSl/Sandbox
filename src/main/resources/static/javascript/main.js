@@ -26,20 +26,6 @@ differentiation_close.addEventListener('click', () => {
     modal_container_differentiation.classList.remove("show");
 });
 
-// Integral
-
-const integral_open = document.getElementById('integral_open');
-const modal_container_integral = document.getElementById('modal_container_integral');
-const integral_close = document.getElementById('integral_close');
-
-integral_open.addEventListener('click', () => {
-    modal_container_integral.classList.add("show");
-});
-
-integral_close.addEventListener('click', () => {
-    modal_container_integral.classList.remove("show");
-});
-
 function function_data() {
     source = String(document.getElementById("form_for_function").value);
     xFrom = String(document.getElementById("xFrom").value);
@@ -122,4 +108,106 @@ function isInt(value) {
   return !isNaN(value) &&
          parseInt(Number(value)) == value &&
          !isNaN(parseInt(value, 10));
+}
+
+function function_data1() {
+    source_1 = String(document.getElementById("source_1").value);
+    xFrom_1 = String(document.getElementById("xFrom_1").value);
+    xTo_1 = String(document.getElementById("xTo_1").value);
+    count_1 = String(document.getElementById("count_1").value);
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_1, xFrom_1, xTo_1, count_1}
+    });
+}
+
+function function_data_with_c1() {
+    source_1 = document.getElementById("source_1").value;
+    xFrom_1 = document.getElementById("xFrom_1").value;
+    xTo_1 = document.getElementById("xTo_1").value;
+    count_1 = document.getElementById("count_1").value;
+    c_1 = document.getElementById("c_1").value;
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_1, xFrom_1, xTo_1, count_1, c_1}
+    });
+}
+
+function table_arrays1(amount) {
+    let xValues = new Array(amount);
+    let yValues = new Array(amount);
+    let xValues_table1 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-1-0-${i}`).value;
+        xValues[i] = el;
+        xValues_table1 += el + " ";
+    }
+    let yValues_table1 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-1-1-${i}`).value;
+        yValues[i] = el;
+        yValues_table1 += el + " ";
+    }
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount) && checkSorted(xValues, amount)) {
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_table1, yValues_table1}
+        });
+        return true;
+    }
+    else return false;
+}
+
+function function_data2() {
+    source_2 = String(document.getElementById("source_2").value);
+    xFrom_2 = String(document.getElementById("xFrom_2").value);
+    xTo_2 = String(document.getElementById("xTo_2").value);
+    count_2 = String(document.getElementById("count_2").value);
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_2, xFrom_2, xTo_2, count_2}
+    });
+}
+
+function function_data_with_c2() {
+    source_2 = document.getElementById("source_2").value;
+    xFrom_2 = document.getElementById("xFrom_2").value;
+    xTo_2 = document.getElementById("xTo_2").value;
+    count_2 = document.getElementById("count_2").value;
+    c_2 = document.getElementById("c_2").value;
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_2, xFrom_2, xTo_2, count_2, c_2}
+    });
+}
+
+function table_arrays2(amount) {
+    let xValues = new Array(amount);
+    let yValues = new Array(amount);
+    let xValues_table2 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-2-0-${i}`).value;
+        xValues[i] = el;
+        xValues_table2 += el + " ";
+    }
+    let yValues_table2 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-2-1-${i}`).value;
+        yValues[i] = el;
+        yValues_table2 += el + " ";
+    }
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount) && checkSorted(xValues, amount)) {
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_table2, yValues_table2}
+        });
+        return true;
+    }
+    else return false;
 }

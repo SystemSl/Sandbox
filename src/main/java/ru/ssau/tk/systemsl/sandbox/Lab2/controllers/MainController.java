@@ -27,6 +27,9 @@ public class MainController {
     private Map<String, MathFunction> map = FunctionsMap.create();
     private TabulatedFunctionFactory fac = new ArrayTabulatedFunctionFactory();
 
+    private TabulatedFunction func_1;
+    private TabulatedFunction func_2;
+
     private double[] ParseUsingTable(String str) throws java.text.ParseException {
         NumberFormat nf = NumberFormat.getInstance(Locale.US);
         String[] a = str.split(" ");
@@ -49,7 +52,7 @@ public class MainController {
             String yValues_table = hsr.getParameter("yValues_table");
             TabulatedFunction func_table = fac.create(ParseUsingTable(xValues_table), ParseUsingTable(yValues_table));
             System.out.println(func_table.toString());
-            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_1.bin")) {
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_table.bin")) {
                 BufferedOutputStream bfos = new BufferedOutputStream(fos);
                 FunctionsIO.serialize(bfos, func_table);
             } catch (IOException er) {
@@ -65,7 +68,7 @@ public class MainController {
             int count = nf.parse(hsr.getParameter("count")).intValue();
             TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
             System.out.println(func_table.toString());
-            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_2.bin")) {
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_function.bin")) {
                 BufferedOutputStream bfos = new BufferedOutputStream(fos);
                 FunctionsIO.serialize(bfos, func_table);
             } catch (IOException er) {
@@ -80,6 +83,63 @@ public class MainController {
             int count = nf.parse(hsr.getParameter("count")).intValue();
             TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
             System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_function.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+
+        if ((hsr.getParameter("xValues_table1") != null) && (hsr.getParameter("yValues_table1") != null)) {
+            String xValues_table = hsr.getParameter("xValues_table1");
+            String yValues_table = hsr.getParameter("yValues_table1");
+            TabulatedFunction func_table = fac.create(ParseUsingTable(xValues_table), ParseUsingTable(yValues_table));
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_1.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+
+        if ((hsr.getParameter("source_1") != null) && (hsr.getParameter("xFrom_1") != null) && (hsr.getParameter("xTo_1") != null) && (hsr.getParameter("count_1") != null) && (hsr.getParameter("c_1") != null)) {
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            MathFunction source = new ConstantFunction(nf.parse(hsr.getParameter("c_1")).doubleValue());
+            double xFrom = nf.parse(hsr.getParameter("xFrom_1")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_1")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_1")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_1.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+        else if ((hsr.getParameter("source_1") != null) && (hsr.getParameter("xFrom_1") != null) && (hsr.getParameter("xTo_1") != null) && (hsr.getParameter("count_1") != null)) {
+            MathFunction source = map.get(hsr.getParameter("source_1"));
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            double xFrom = nf.parse(hsr.getParameter("xFrom_1")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_1")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_1")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_1.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+
+        if ((hsr.getParameter("xValues_table2") != null) && (hsr.getParameter("yValues_table2") != null)) {
+            String xValues_table = hsr.getParameter("xValues_table2");
+            String yValues_table = hsr.getParameter("yValues_table2");
+            TabulatedFunction func_table = fac.create(ParseUsingTable(xValues_table), ParseUsingTable(yValues_table));
+            System.out.println(func_table.toString());
             try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_2.bin")) {
                 BufferedOutputStream bfos = new BufferedOutputStream(fos);
                 FunctionsIO.serialize(bfos, func_table);
@@ -88,7 +148,80 @@ public class MainController {
             }
         }
 
+        if ((hsr.getParameter("source_2") != null) && (hsr.getParameter("xFrom_2") != null) && (hsr.getParameter("xTo_2") != null) && (hsr.getParameter("count_2") != null) && (hsr.getParameter("c_2") != null)) {
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            MathFunction source = new ConstantFunction(nf.parse(hsr.getParameter("c_2")).doubleValue());
+            double xFrom = nf.parse(hsr.getParameter("xFrom_2")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_2")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_2")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_2.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+        else if ((hsr.getParameter("source_2") != null) && (hsr.getParameter("xFrom_2") != null) && (hsr.getParameter("xTo_2") != null) && (hsr.getParameter("count_2") != null)) {
+            MathFunction source = map.get(hsr.getParameter("source_2"));
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            double xFrom = nf.parse(hsr.getParameter("xFrom_2")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_2")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_2")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_2.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
 
+        if ((hsr.getParameter("xValues_table3") != null) && (hsr.getParameter("yValues_table3") != null)) {
+            String xValues_table = hsr.getParameter("xValues_table3");
+            String yValues_table = hsr.getParameter("yValues_table3");
+            TabulatedFunction func_table = fac.create(ParseUsingTable(xValues_table), ParseUsingTable(yValues_table));
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_3.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+
+        if ((hsr.getParameter("source_3") != null) && (hsr.getParameter("xFrom_3") != null) && (hsr.getParameter("xTo_3") != null) && (hsr.getParameter("count_3") != null) && (hsr.getParameter("c_3") != null)) {
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            MathFunction source = new ConstantFunction(nf.parse(hsr.getParameter("c_3")).doubleValue());
+            double xFrom = nf.parse(hsr.getParameter("xFrom_3")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_3")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_3")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_3.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
+        else if ((hsr.getParameter("source_3") != null) && (hsr.getParameter("xFrom_3") != null) && (hsr.getParameter("xTo_3") != null) && (hsr.getParameter("count_3") != null)) {
+            MathFunction source = map.get(hsr.getParameter("source_3"));
+            NumberFormat nf = NumberFormat.getInstance(Locale.US);
+            double xFrom = nf.parse(hsr.getParameter("xFrom_3")).doubleValue();
+            double xTo = nf.parse(hsr.getParameter("xTo_3")).doubleValue();
+            int count = nf.parse(hsr.getParameter("count_3")).intValue();
+            TabulatedFunction func_table = fac.create(source, xFrom, xTo, count);
+            System.out.println(func_table.toString());
+            try (FileOutputStream fos = new FileOutputStream("src/main/resources/static/WebOutput/tabfunc_3.bin")) {
+                BufferedOutputStream bfos = new BufferedOutputStream(fos);
+                FunctionsIO.serialize(bfos, func_table);
+            } catch (IOException er) {
+                er.printStackTrace();
+            }
+        }
 
         if (hsr.getParameter("cur_fac") != null)
             if (Objects.equals(hsr.getParameter("cur_fac"), "Array"))

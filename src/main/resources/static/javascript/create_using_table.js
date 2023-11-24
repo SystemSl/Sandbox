@@ -101,7 +101,7 @@ amount_submit.addEventListener('click', () => {
                     btn.classList.add('btn');
                     btn.classList.add('btn-warning');
                     btn.classList.add('mt-3');
-                    btn.setAttribute('href', "/WebOutput/tabfunc_1.bin");
+                    btn.setAttribute('href', "/WebOutput/tabfunc_table.bin");
                     btn.setAttribute('download', "tabulated_function.bin");
                     btn.textContent = "Save as";
                     btn.setAttribute('id', 'save_tabulated_function_table');

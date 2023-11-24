@@ -119,7 +119,7 @@ create_using_function_open.addEventListener('click', () => {
                         btn.classList.add('btn');
                         btn.classList.add('btn-warning');
                         btn.classList.add('mt-3');
-                        btn.setAttribute('href', "/WebOutput/tabfunc_2.bin");
+                        btn.setAttribute('href', "/WebOutput/tabfunc_function.bin");
                         btn.setAttribute('download', "tabulated_function.bin");
                         btn.textContent = "Save as";
                         btn.setAttribute('id', 'save_tabulated_function_function');
@@ -152,7 +152,7 @@ create_using_function_open.addEventListener('click', () => {
                 btn.classList.add('btn');
                 btn.classList.add('btn-warning');
                 btn.classList.add('mt-3');
-                btn.setAttribute('href', "/WebOutput/tabfunc_2.bin");
+                btn.setAttribute('href', "/WebOutput/tabfunc_function.bin");
                 btn.setAttribute('download', "tabulated_function.bin");
                 btn.textContent = "Save as";
                 btn.setAttribute('id', 'save_tabulated_function_function');

@@ -1,4 +1,5 @@
 .allcards {
+    width: 100%;
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
@@ -16,24 +17,10 @@
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
-.modal-container-create-using-table {
+.modal-container-vanish {
     opacity: 0;
 }
-.modal-container-create-using-function {
-    opacity: 0;
-}
-.modal-container-element-wise-operations {
-    opacity: 0;
-}
-.modal-container-differentiation {
-    opacity: 0;
-}
-.modal-container-integral {
-    opacity: 0;
-}
-.modal-container-settings {
-    opacity: 0;
-}
+
 .show {
     pointer-events: auto;
     opacity: 1;
@@ -55,4 +42,7 @@ td {
 table input {
     width: 50px;
     text-align: center;
+}
+table {
+    max-height: 40%;
 }

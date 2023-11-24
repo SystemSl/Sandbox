@@ -1,5 +1,5 @@
 <div th:fragment="create_using_table">
-    <div class="modal-container modal-container-create-using-table" id="modal_container_create_using_table">
+    <div class="modal-container modal-container-vanish" id="modal_container_create_using_table">
         <div class="modal_main">
             <h3>Create tabulated function using table</h3>
             <iframe name="votar" style="display:none;"></iframe>
@@ -15,7 +15,7 @@
 </div>
 
 <div th:fragment="create_using_function">
-    <div class="modal-container modal-container-create-using-function" id="modal_container_create_using_function">
+    <div class="modal-container modal-container-vanish" id="modal_container_create_using_function">
         <div class="modal_main">
             <h3>Create tabulated function using function</h3>
             <form action="/" target="votar" id="form_for_create_using_function"></form>
@@ -25,21 +25,47 @@
 </div>
 
 <div th:fragment="element_wise_operations">
-    <div class="modal-container modal-container-element-wise-operations" id="modal_container_element_wise_operations">
+    <div class="modal-container modal-container-vanish" id="modal_container_element_wise_operations">
         <div class="modal_main">
-            <h1>Modals are cool2</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, eveniet culpa quaerat atque veniam
-                est assumenda perferendis neque commodi! Quasi similique animi delectus veniam sequi soluta ab esse,
-                provident id.
-            </p>
-            <button class="btn btn-primary" id="element_wise_operations_close">Close</button>
+            <h3>Element-wise operations</h3>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h5>First operand</h5>
+                    <div>
+                        <button class="btn btn-primary" id="operand_1_table">Create using table</button>
+                        <button class="btn btn-primary" id="operand_1_function">Create using function</button>
+                    </div>
+                    <div id="element_wise_1"></div>
+                </div>
+                <div class="col-4 text-center">
+                    <h5>Second operand</h5>
+                    <div>
+                        <button class="btn btn-primary" id="operand_2_table">Create using table</button>
+                        <button class="btn btn-primary" id="operand_2_function">Create using function</button>
+                    </div>
+                    <div id="element_wise_2"></div>
+                </div>
+                <div class="col-4 text-center">
+                    <h5>Result</h5>
+                    <div>
+                        <select>
+                            <option>+</option>
+                            <option>-</option>
+                            <option>*</option>
+                            <option>/</option>
+                        </select>
+                        <button class="btn btn-primary">Confirm</button>
+                    </div>
+                    <div id="element_wise_result"></div>
+                </div>
+            </div>
+            <button class="btn btn-danger mt-5" id="element_wise_operations_close">Close</button>
         </div>
     </div>
 </div>
 
 <div th:fragment="differentiation">
-    <div class="modal-container modal-container-differentiation" id="modal_container_differentiation">
+    <div class="modal-container modal-container-vanish" id="modal_container_differentiation">
         <div class="modal_main">
             <h1>Modals are cool3</h1>
             <p>
@@ -52,26 +78,32 @@
     </div>
 </div>
 
-<div th:fragment="integral">
-    <div class="modal-container modal-container-create-using-function" id="modal_container_integral">
-        <div class="modal_main">
-            <h1>Modals are cool4</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, eveniet culpa quaerat atque veniam
-                est assumenda perferendis neque commodi! Quasi similique animi delectus veniam sequi soluta ab esse,
-                provident id.
-            </p>
-            <button class="btn btn-primary" id="integral_close">Close</button>
-        </div>
-    </div>
-</div>
-
 <div th:fragment="settings">
-    <div class="modal-container modal-container-create-using-function" id="modal_container_settings">
+    <div class="modal-container modal-container-vanish" id="modal_container_settings">
         <div class="modal_main">
             <h3>Settings</h3>
             <form action="/" target="votar" id="form_for_factory"></form>
             <button class="btn btn-danger mt-5" id="settings_close">Close</button>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="element_wise_operand_1">
+    <div class="modal-container modal-container-vanish" id="modal_container_element_wise_operand_1">
+        <div class="modal_main">
+            <h3>First operand</h3>
+            <div id="element_wise_op_1"></div>
+            <button class="btn btn-danger mt-5" id="element_wise_operand_1_close">Close</button>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="element_wise_operand_2">
+    <div class="modal-container modal-container-vanish" id="modal_container_element_wise_operand_2">
+        <div class="modal_main">
+            <h3>Second operand</h3>
+            <div id="element_wise_op_2"></div>
+            <button class="btn btn-danger mt-5" id="element_wise_operand_2_close">Close</button>
         </div>
     </div>
 </div>
