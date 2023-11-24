@@ -31,11 +31,9 @@ public class MainController {
 
     private double[] yVal;
 
-    private TabulatedFunction func_table;
-
     private TabulatedFunctionFactory fac = new ArrayTabulatedFunctionFactory();
 
-    private double[] ParseString(String str) throws java.text.ParseException {
+    private double[] ParseUsingTable(String str) throws java.text.ParseException {
         NumberFormat nf = NumberFormat.getInstance(Locale.US);
         String[] a = str.split(" ");
         double[] vals = new double[a.length];
@@ -57,13 +55,13 @@ public class MainController {
         System.out.println(xValues_table);
         System.out.println(yValues_table);
         if (xValues_table != null) {
-            xVal = ParseString(xValues_table);
+            xVal = ParseUsingTable(xValues_table);
         }
         if (yValues_table != null) {
-            yVal = ParseString(yValues_table);
+            yVal = ParseUsingTable(yValues_table);
         }
         if (xVal != null && yVal != null) {
-            func_table = fac.create(xVal, yVal);
+            TabulatedFunction func_table = fac.create(xVal, yVal);
             xVal = null;
             yVal = null;
             System.out.println(func_table.toString());
@@ -74,6 +72,7 @@ public class MainController {
             catch (IOException er) {
                 er.printStackTrace();
             }
+            func_table = null;
         }
         return "redirect:/";
     }

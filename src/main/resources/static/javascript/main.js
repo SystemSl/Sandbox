@@ -1,19 +1,3 @@
-
-
-// Create using function
-
-const create_using_function_open = document.getElementById('create_using_function_open');
-const modal_container_create_using_function = document.getElementById('modal_container_create_using_function');
-const create_using_function_close = document.getElementById('create_using_function_close');
-
-create_using_function_open.addEventListener('click', () => {
-    modal_container_create_using_function.classList.add("show");
-});
-
-create_using_function_close.addEventListener('click', () => {
-    modal_container_create_using_function.classList.remove("show");
-});
-
 // Element-wise operations
 
 const element_wise_operations_open = document.getElementById('element_wise_operations_open');
@@ -105,6 +89,13 @@ function checkUndefined(ar, amount) {
             return false;
     }
     return true;
+}
+
+function checkUndefinedNumber(num) {
+    if ((num == undefined) || (num == ""))
+        return false;
+    else
+        return true;
 }
 
 function checkSorted(ar, amount) {
