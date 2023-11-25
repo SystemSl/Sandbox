@@ -65,7 +65,7 @@ btn_operand_1_table.addEventListener('click', () => {
             f1.appendChild(form_table_1_submit);
             form_table_1_submit.addEventListener('click', () => {
                 if (table_arrays1(form_amount_1.value)) {
-                    modal_container_element_wise_operand_1.classList.remove("show");
+                    setTimeout(() => { location.reload(); }, 500);
                 }
                 else
                     alert("Structure of the tabulated function is broken!");
@@ -175,13 +175,13 @@ btn_operand_1_function.addEventListener('click', () => {
                         }
                         else {
                             function_data_with_c1();
-                            modal_container_element_wise_operand_1.classList.remove("show");
+                            setTimeout(() => { location.reload(); }, 500);
                         }
                     });
                 }
                 else {
                     function_data1();
-                    modal_container_element_wise_operand_1.classList.remove("show");
+                    setTimeout(() => { location.reload(); }, 500);
                 }
             }
         });

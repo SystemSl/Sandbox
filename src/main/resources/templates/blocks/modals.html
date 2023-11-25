@@ -32,29 +32,41 @@
                 <div class="col-4 text-center">
                     <h5>First operand</h5>
                     <div>
-                        <button class="btn btn-primary" id="operand_1_table">Create using table</button>
-                        <button class="btn btn-primary" id="operand_1_function">Create using function</button>
+                        <button class="btn btn-primary mb-1" id="operand_1_table">Create using table</button>
+                        <button class="btn btn-primary mb-1" id="operand_1_function">Create using function</button>
+                        <div class="form-file">
+                            <form target="votar" enctype="multipart/form-data" method="post">
+                                <input type="file" class="form-file-input" id="file_op_1">
+                                <button class="btn btn-success btn-sm" type="submit" id="file_op_1_submit">Upload</button>
+                            </form>
+                        </div>
                     </div>
                     <div id="element_wise_1"></div>
                 </div>
                 <div class="col-4 text-center">
-                    <h5>Second operand</h5>
+                    <h5>First operand</h5>
                     <div>
-                        <button class="btn btn-primary" id="operand_2_table">Create using table</button>
-                        <button class="btn btn-primary" id="operand_2_function">Create using function</button>
+                        <button class="btn btn-primary mb-1" id="operand_2_table">Create using table</button>
+                        <button class="btn btn-primary mb-1" id="operand_2_function">Create using function</button>
+                        <div class="form-file">
+                            <form target="votar" enctype="multipart/form-data" method="post">
+                                <input type="file" class="form-file-input" id="file_op_2">
+                                <button class="btn btn-success btn-sm" type="submit" id="file_op_2_submit">Upload</button>
+                            </form>
+                        </div>
                     </div>
                     <div id="element_wise_2"></div>
                 </div>
                 <div class="col-4 text-center">
                     <h5>Result</h5>
                     <div>
-                        <select>
+                        <select class="mb-1">
                             <option>+</option>
                             <option>-</option>
                             <option>*</option>
                             <option>/</option>
                         </select>
-                        <button class="btn btn-primary">Confirm</button>
+                        <button class="btn btn-primary mb-1">Confirm</button>
                     </div>
                     <div id="element_wise_result"></div>
                 </div>

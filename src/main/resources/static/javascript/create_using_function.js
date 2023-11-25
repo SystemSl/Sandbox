@@ -1,6 +1,6 @@
 // Create using function
 
-const funcs = ["Square function", "Identity function", "Const function"];
+const funcs = ["Square function", "Identity function", "Const function", "Unit function", "Zero function", "Atan + Actan", "Asin + Acos"];
 funcs.sort();
 
 const create_using_function_open = document.getElementById('create_using_function_open');

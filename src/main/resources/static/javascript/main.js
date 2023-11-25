@@ -1,17 +1,3 @@
-// Element-wise operations
-
-const element_wise_operations_open = document.getElementById('element_wise_operations_open');
-const modal_container_element_wise_operations = document.getElementById('modal_container_element_wise_operations');
-const element_wise_operations_close = document.getElementById('element_wise_operations_close');
-
-element_wise_operations_open.addEventListener('click', () => {
-    modal_container_element_wise_operations.classList.add("show");
-});
-
-element_wise_operations_close.addEventListener('click', () => {
-    modal_container_element_wise_operations.classList.remove("show");
-});
-
 // Differentiation
 
 const differentiation_open = document.getElementById('differentiation_open');
@@ -210,4 +196,13 @@ function table_arrays2(amount) {
         return true;
     }
     else return false;
+}
+
+function functions_clear() {
+    let clear = "yes";
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {clear}
+    });
 }
