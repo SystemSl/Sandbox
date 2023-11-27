@@ -8,6 +8,9 @@ settings_open.addEventListener('click', () => {
     el = document.getElementById("container_of_form_for_factory");
     if (el != null)
         el.remove();
+    el = document.getElementById("container_of_form_for_uploadpath");
+    if (el != null)
+        el.remove();
     container_of_form_for_factory = document.createElement('div');
     container_of_form_for_factory.setAttribute('id', "container_of_form_for_factory");
     document.getElementById("form_for_factory").appendChild(container_of_form_for_factory);
