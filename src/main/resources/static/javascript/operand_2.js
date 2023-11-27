@@ -25,8 +25,11 @@ btn_operand_2_table.addEventListener('click', () => {
     form_amount_2_submit.textContent = "Confirm";
     f2.appendChild(form_amount_2_submit);
     form_amount_2_submit.addEventListener('click', () => {
-        if ((form_amount_2.value < 2) || !isInt(form_amount_2.value)) {
-            alert("Incorrect amount!")
+        if (form_amount_2.value < 2) {
+                    alert("Amount < 2");
+        }
+        else if (!isInt(form_amount_2.value)){
+            alert("Amount should be integer");
         }
         else {
             table_form_2 = document.createElement('div');
@@ -65,10 +68,8 @@ btn_operand_2_table.addEventListener('click', () => {
             f2.appendChild(form_table_2_submit);
             form_table_2_submit.addEventListener('click', () => {
                 if (table_arrays2(form_amount_2.value)) {
-                    setTimeout(() => { location.reload(); }, 500);
+                    setTimeout(() => { location.reload(); }, 1000);
                 }
-                else
-                    alert("Structure of the tabulated function is broken!");
             });
         }
     });
@@ -126,8 +127,11 @@ btn_operand_2_function.addEventListener('click', () => {
     func_submit_2.textContent = "Confirm";
     f2.appendChild(func_submit_2);
     func_submit_2.addEventListener('click', () => {
-            if ((count_2.value < 2) || !isInt(count_2.value)) {
-                alert("Incorrect count!")
+            if (count_2.value < 2) {
+                alert("Count < 2");
+            }
+            else if (!isInt(count_2.value)){
+                alert("Count should be integer");
             }
             else if (!checkUndefinedNumber(xFrom_2.value)) {
                 alert("Undefined x1!")
@@ -175,13 +179,13 @@ btn_operand_2_function.addEventListener('click', () => {
                         }
                         else {
                             function_data_with_c2();
-                            setTimeout(() => { location.reload(); }, 500);
+                            setTimeout(() => { location.reload(); }, 1000);
                         }
                     });
                 }
                 else {
                     function_data2();
-                    setTimeout(() => { location.reload(); }, 500);
+                    setTimeout(() => { location.reload(); }, 1000);
                 }
             }
         });

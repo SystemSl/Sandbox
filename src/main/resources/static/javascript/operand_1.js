@@ -25,8 +25,11 @@ btn_operand_1_table.addEventListener('click', () => {
     form_amount_1_submit.textContent = "Confirm";
     f1.appendChild(form_amount_1_submit);
     form_amount_1_submit.addEventListener('click', () => {
-        if ((form_amount_1.value < 2) || !isInt(form_amount_1.value)) {
-            alert("Incorrect amount!")
+        if (form_amount_1.value < 2) {
+            alert("Amount < 2");
+        }
+        else if (!isInt(form_amount_1.value)){
+            alert("Amount should be integer");
         }
         else {
             table_form_1 = document.createElement('div');
@@ -67,8 +70,6 @@ btn_operand_1_table.addEventListener('click', () => {
                 if (table_arrays1(form_amount_1.value)) {
                     setTimeout(() => { location.reload(); }, 500);
                 }
-                else
-                    alert("Structure of the tabulated function is broken!");
             });
         }
     });
@@ -126,8 +127,11 @@ btn_operand_1_function.addEventListener('click', () => {
     func_submit_1.textContent = "Confirm";
     f1.appendChild(func_submit_1);
     func_submit_1.addEventListener('click', () => {
-            if ((count_1.value < 2) || !isInt(count_1.value)) {
-                alert("Incorrect count!")
+            if (count_1.value < 2) {
+                alert("Count < 2");
+            }
+            else if (!isInt(count_1.value)){
+                alert("Count should be integer");
             }
             else if (!checkUndefinedNumber(xFrom_1.value)) {
                 alert("Undefined x1!")
@@ -175,7 +179,7 @@ btn_operand_1_function.addEventListener('click', () => {
                         }
                         else {
                             function_data_with_c1();
-                            setTimeout(() => { location.reload(); }, 500);
+                            setTimeout(() => { location.reload(); }, 1000);
                         }
                     });
                 }

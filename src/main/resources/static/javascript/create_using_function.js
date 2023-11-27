@@ -58,8 +58,11 @@ create_using_function_open.addEventListener('click', () => {
     form_for_create_using_function_submit.textContent = "Confirm";
     container_for_options.appendChild(form_for_create_using_function_submit);
     form_for_create_using_function_submit.addEventListener('click', () => {
-        if ((count.value < 2) || !isInt(count.value)) {
-            alert("Incorrect count!")
+        if (count.value < 2) {
+            alert("Count < 2");
+        }
+        else if (!isInt(count.value)){
+            alert("Count should be integer");
         }
         else if (!checkUndefinedNumber(xFrom.value)) {
             alert("Undefined x1!")
@@ -119,8 +122,8 @@ create_using_function_open.addEventListener('click', () => {
                         btn.classList.add('btn');
                         btn.classList.add('btn-warning');
                         btn.classList.add('mt-3');
-                        btn.setAttribute('href', "/WebOutput/tabfunc_function.bin");
-                        btn.setAttribute('download', "tabulated_function.bin");
+                        btn.setAttribute('href', "/WebOutput/tabfunc_function");
+                        btn.setAttribute('download', "tabulated_function");
                         btn.textContent = "Save as";
                         btn.setAttribute('id', 'save_tabulated_function_function');
                         container_for_options.appendChild(btn);
@@ -152,8 +155,8 @@ create_using_function_open.addEventListener('click', () => {
                 btn.classList.add('btn');
                 btn.classList.add('btn-warning');
                 btn.classList.add('mt-3');
-                btn.setAttribute('href', "/WebOutput/tabfunc_function.bin");
-                btn.setAttribute('download', "tabulated_function.bin");
+                btn.setAttribute('href', "/WebOutput/tabfunc_function");
+                btn.setAttribute('download', "tabulated_function");
                 btn.textContent = "Save as";
                 btn.setAttribute('id', 'save_tabulated_function_function');
                 container_for_options.appendChild(btn);

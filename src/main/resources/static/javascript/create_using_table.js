@@ -30,8 +30,11 @@ create_using_table_close.addEventListener('click', () => {
 });
 
 amount_submit.addEventListener('click', () => {
-    if ((input_amount.value < 2) || !isInt(input_amount.value)) {
-        alert("Incorrect amount!")
+    if (input_amount.value < 2) {
+        alert("Amount < 2");
+    }
+    else if (!isInt(input_amount.value)){
+        alert("Amount should be integer");
     }
     else {
             tbl  = document.createElement('table');
@@ -101,14 +104,12 @@ amount_submit.addEventListener('click', () => {
                     btn.classList.add('btn');
                     btn.classList.add('btn-warning');
                     btn.classList.add('mt-3');
-                    btn.setAttribute('href', "/WebOutput/tabfunc_table.bin");
-                    btn.setAttribute('download', "tabulated_function.bin");
+                    btn.setAttribute('href', "/WebOutput/tabfunc_table");
+                    btn.setAttribute('download', "tabulated_function");
                     btn.textContent = "Save as";
                     btn.setAttribute('id', 'save_tabulated_function_table');
                     document.getElementById("tabulated_function_table").appendChild(btn);
                  }
-                 else
-                    alert("Structure of the tabulated function is broken!");
             });
         form_for_amount.classList.add("vanish");
     }

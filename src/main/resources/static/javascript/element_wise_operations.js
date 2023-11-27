@@ -42,17 +42,13 @@ if (func_1_x != "") {
              }
              else {
                 if (j == 0) {
-                    el = document.createElement('input');
-                    el.setAttribute('disabled', true);
-                    el.value = func_1_x_a[i-1];
-                    el.setAttribute('id', `operand-1-${i-1}-${j}`);
-                    td.appendChild(el);
+                    td.appendChild(document.createTextNode(func_1_x_a[i-1]));
                 }
                 else {
                     el = document.createElement('input');
                     el.value = func_1_y_a[i-1];
                     el.setAttribute('type', 'number');
-                    el.setAttribute('id', `operand-1-${i-1}-${j}`);
+                    el.setAttribute('id', `operand-1-${i-1}`);
                     td.appendChild(el);
                 }
             }
@@ -63,12 +59,26 @@ if (func_1_x != "") {
     operand_1_table.setAttribute('style', "max-height: 400px; overflow-x: auto")
     element_wise_operand_1_form.appendChild(operand_1_table);
     operand_1_table.appendChild(tbl);
+
+    btn = document.createElement('button');
+    btn.classList.add('btn');
+    btn.classList.add('btn-success');
+    btn.classList.add('mt-3');
+    btn.textContent = "Confirm changes";
+    btn.setAttribute('style', "margin-right: 10px");
+    element_wise_operand_1_area.appendChild(btn);
+    btn.addEventListener('click', () => {
+        length = func_1_x.split(' ').length;
+        if (confirm_op_1(length))
+            setTimeout(() => { location.reload(); }, 1000);
+        });
+
     btn = document.createElement('a');
     btn.classList.add('btn');
     btn.classList.add('btn-warning');
     btn.classList.add('mt-3');
-    btn.setAttribute('href', "/WebOutput/tabfunc_1.bin");
-    btn.setAttribute('download', "tabulated_function-1.bin");
+    btn.setAttribute('href', "/WebOutput/tabfunc_1");
+    btn.setAttribute('download', "tabulated_function");
     btn.textContent = "Save as";
     element_wise_operand_1_area.appendChild(btn);
 }
@@ -86,7 +96,7 @@ file_op_1_submit.addEventListener('click', () => {
                 type: 'POST',
                 data: {file_1}
         });
-        setTimeout(() => { location.reload(); }, 500);
+        setTimeout(() => { location.reload(); }, 1000);
     }
 });
 
@@ -120,17 +130,13 @@ if (func_2_x != "") {
              }
              else {
                 if (j == 0) {
-                    el = document.createElement('input');
-                    el.setAttribute('disabled', true);
-                    el.value = func_2_x_a[i-1];
-                    el.setAttribute('id', `operand-2-${i-1}-${j}`);
-                    td.appendChild(el);
+                    td.appendChild(document.createTextNode(func_2_x_a[i-1]));
                 }
                 else {
                     el = document.createElement('input');
                     el.value = func_2_y_a[i-1];
                     el.setAttribute('type', 'number');
-                    el.setAttribute('id', `operand-2-${i-1}-${j}`);
+                    el.setAttribute('id', `operand-2-${i-1}`);
                     td.appendChild(el);
                 }
             }
@@ -141,12 +147,26 @@ if (func_2_x != "") {
     operand_2_table.setAttribute('style', "max-height: 400px; overflow-x: auto")
     element_wise_operand_2_form.appendChild(operand_2_table);
     operand_2_table.appendChild(tbl);
+
+    btn = document.createElement('button');
+    btn.classList.add('btn');
+    btn.classList.add('btn-success');
+    btn.classList.add('mt-3');
+    btn.textContent = "Confirm changes";
+    btn.setAttribute('style', "margin-right: 10px");
+    element_wise_operand_2_area.appendChild(btn);
+    btn.addEventListener('click', () => {
+        length = func_2_x.split(' ').length;
+        if (confirm_op_2(length))
+            setTimeout(() => { location.reload(); }, 1000);
+    });
+
     btn = document.createElement('a');
     btn.classList.add('btn');
     btn.classList.add('btn-warning');
     btn.classList.add('mt-3');
-    btn.setAttribute('href', "/WebOutput/tabfunc_2.bin");
-    btn.setAttribute('download', "tabulated_function-2.bin");
+    btn.setAttribute('href', "/WebOutput/tabfunc_2");
+    btn.setAttribute('download', "tabulated_function-2");
     btn.textContent = "Save as";
     element_wise_operand_2_area.appendChild(btn);
 }
@@ -164,6 +184,71 @@ file_op_2_submit.addEventListener('click', () => {
                 type: 'POST',
                 data: {file_2}
         });
-        setTimeout(() => { location.reload(); }, 500);
+        setTimeout(() => { location.reload(); }, 1000);
     }
 });
+
+confirm_operation = document.getElementById("confirm_operation");
+confirm_operation.addEventListener('click', () => {
+    if (func_1_x != "" && func_2_x != "") {
+        if (func_1_x != func_2_x) {
+            alert("Operands have different X");
+        }
+        else {
+            select_operation = document.getElementById("select_operation");
+            if (table_arrays_result(func_1_x.split(' ').length, select_operation.value)) {
+                setTimeout(() => { location.reload(); }, 1000);
+            }
+        }
+    }
+});
+
+if (element_wise_result_x != "") {
+    modal_container_element_wise_operations.classList.add("show");
+    element_wise_result_x_a = element_wise_result_x.split(' ');
+    element_wise_result_y_a = element_wise_result_y.split(' ');
+
+    element_wise_result_area = document.createElement('div');
+    element_wise_result_area.setAttribute('id', "element_wise_result_area");
+
+    document.getElementById('element_wise_result').appendChild(element_wise_result_area);
+
+    tbl  = document.createElement('table');
+    tbl.style.border = '1px solid black';
+    tbl.classList.add("mt-5");
+
+    for(var i = 0; i < element_wise_result_x_a.length; i++) {
+        var tr = tbl.insertRow();
+        let el, td;
+        for(var j = 0; j < 2; j++){
+            td = tr.insertCell();
+            if (i == 0 && j == 0) {
+                td.appendChild(document.createTextNode('X'));
+            }
+            else if (i == 0 && j == 1) {
+                td.appendChild(document.createTextNode('Y'));
+            }
+            else {
+                if (j == 0) {
+                    td.appendChild(document.createTextNode(element_wise_result_x_a[i-1]));
+                }
+                else {
+                    td.appendChild(document.createTextNode(element_wise_result_y_a[i-1]));
+                }
+            }
+        }
+    }
+    element_wise_result_area.setAttribute('style', "display: flex; align-items: center; justify-content: center; text-align: center;");
+    result_table = document.createElement('div');
+    result_table.setAttribute('style', "max-height: 400px; overflow-x: auto")
+    element_wise_result_area.appendChild(result_table);
+    result_table.appendChild(tbl);
+    btn = document.createElement('a');
+    btn.classList.add('btn');
+    btn.classList.add('btn-warning');
+    btn.classList.add('mt-3');
+    btn.setAttribute('href', "/WebOutput/tabfunc_result");
+    btn.setAttribute('download', "tabulated_function-result");
+    btn.textContent = "Save as";
+    element_wise_result.appendChild(btn);
+}

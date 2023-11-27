@@ -1,17 +1,3 @@
-// Differentiation
-
-const differentiation_open = document.getElementById('differentiation_open');
-const modal_container_differentiation = document.getElementById('modal_container_differentiation');
-const differentiation_close = document.getElementById('differentiation_close');
-
-differentiation_open.addEventListener('click', () => {
-    modal_container_differentiation.classList.add("show");
-});
-
-differentiation_close.addEventListener('click', () => {
-    modal_container_differentiation.classList.remove("show");
-});
-
 function function_data() {
     source = String(document.getElementById("form_for_function").value);
     xFrom = String(document.getElementById("xFrom").value);
@@ -52,15 +38,24 @@ function table_arrays(amount) {
         yValues[i] = el;
         yValues_table += el + " ";
     }
-    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount) && checkSorted(xValues, amount)) {
-        $.ajax ({
-            url: "/",
-            type: 'POST',
-            data: {xValues_table, yValues_table}
-        });
-        return true;
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount)) {
+        if (checkSorted(xValues, amount)) {
+            $.ajax ({
+                url: "/",
+                type: 'POST',
+                data: {xValues_table, yValues_table}
+            });
+            return true;
+        }
+        else {
+            alert("X not sorted");
+            return false;
+        }
     }
-    else return false;
+    else {
+        alert("Undefined values found");
+        return false;
+    }
 }
 
 function checkUndefined(ar, amount) {
@@ -136,15 +131,24 @@ function table_arrays1(amount) {
         yValues[i] = el;
         yValues_table1 += el + " ";
     }
-    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount) && checkSorted(xValues, amount)) {
-        $.ajax ({
-            url: "/",
-            type: 'POST',
-            data: {xValues_table1, yValues_table1}
-        });
-        return true;
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount)) {
+        if (checkSorted(xValues, amount)) {
+            $.ajax ({
+                url: "/",
+                type: 'POST',
+                data: {xValues_table1, yValues_table1}
+            });
+            return true;
+            }
+        else {
+            alert("X not sorted");
+            return false;
+        }
     }
-    else return false;
+    else {
+        alert("Undefined values found");
+        return false;
+    }
 }
 
 function function_data2() {
@@ -187,15 +191,63 @@ function table_arrays2(amount) {
         yValues[i] = el;
         yValues_table2 += el + " ";
     }
-    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount) && checkSorted(xValues, amount)) {
-        $.ajax ({
-            url: "/",
-            type: 'POST',
-            data: {xValues_table2, yValues_table2}
-        });
-        return true;
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount)) {
+        if (checkSorted(xValues, amount)) {
+            $.ajax ({
+                url: "/",
+                type: 'POST',
+                data: {xValues_table2, yValues_table2}
+            });
+            return true;
+        }
+        else {
+            alert("X not sorted");
+            return false;
+        }
     }
-    else return false;
+    else {
+        alert("Undefined values found");
+        return false;
+    }
+}
+
+function table_arrays_result(amount, operation) {
+    let yValues_op_1_a = new Array(amount);
+    let yValues_op_2_a = new Array(amount);
+    let yValues_op_1 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        console.log(amount);
+        console.log(operation);
+        let el = document.getElementById(`operand-1-${i}`).value;
+        yValues_op_1_a[i] = el;
+        yValues_op_1 += el + " ";
+    }
+    let yValues_op_2 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        console.log(document.getElementById(`operand-2-${i}`));
+        let el = document.getElementById(`operand-2-${i}`).value;
+        yValues_op_2_a[i] = el;
+        yValues_op_2 += el + " ";
+    }
+    if (checkUndefined(yValues_op_1_a, amount) && checkUndefined(yValues_op_2_a, amount)) {
+        if ((operation == "/") && ((yValues_op_2_a.indexOf('0') != -1) || (yValues_op_2_a.indexOf('0.0') != -1))) {
+            alert("Division by zero");
+            return false;
+        }
+        else {
+            xValues_result = func_1_x;
+            $.ajax ({
+                url: "/",
+                type: 'POST',
+                data: {xValues_result, yValues_op_1, yValues_op_2, operation}
+            });
+            return true;
+        }
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
 }
 
 function functions_clear() {
@@ -205,4 +257,156 @@ function functions_clear() {
         type: 'POST',
         data: {clear}
     });
+}
+
+function confirm_op_2(amount) {
+    let yValues = new Array(amount);
+    let yValues_table2 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        let el = document.getElementById(`operand-2-${i}`).value;
+        yValues[i] = el;
+        yValues_table2 += el + " ";
+    }
+    if (checkUndefined(yValues, amount)) {
+        xValues_table2 = func_2_x;
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_table2, yValues_table2}
+        });
+        return true;
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
+};
+
+function confirm_op_1(amount) {
+    let yValues = new Array(amount);
+    let yValues_table1 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        let el = document.getElementById(`operand-1-${i}`).value;
+        yValues[i] = el;
+        yValues_table1 += el + " ";
+    }
+    if (checkUndefined(yValues, amount)) {
+        xValues_table1 = func_1_x;
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_table1, yValues_table1}
+        });
+        return true;
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
+};
+
+function function_data3() {
+    source_3 = String(document.getElementById("source_3").value);
+    xFrom_3 = String(document.getElementById("xFrom_3").value);
+    xTo_3 = String(document.getElementById("xTo_3").value);
+    count_3 = String(document.getElementById("count_3").value);
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_3, xFrom_3, xTo_3, count_3}
+    });
+}
+
+function function_data_with_c3() {
+    source_3 = document.getElementById("source_3").value;
+    xFrom_3 = document.getElementById("xFrom_3").value;
+    xTo_3 = document.getElementById("xTo_3").value;
+    count_3 = document.getElementById("count_3").value;
+    c_3 = document.getElementById("c_3").value;
+    $.ajax ({
+        url: "/",
+        type: 'POST',
+        data: {source_3, xFrom_3, xTo_3, count_3, c_3}
+    });
+}
+
+function table_arrays3(amount) {
+    let xValues = new Array(amount);
+    let yValues = new Array(amount);
+    let xValues_table3 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-3-0-${i}`).value;
+        xValues[i] = el;
+        xValues_table3 += el + " ";
+    }
+    let yValues_table3 = ""
+    for (let i = 0; i < amount; i++) {
+        let el = document.getElementById(`input-table-3-1-${i}`).value;
+        yValues[i] = el;
+        yValues_table3 += el + " ";
+    }
+    if (checkUndefined(xValues, amount) && checkUndefined(yValues, amount)) {
+        if (checkSorted(xValues, amount)) {
+            $.ajax ({
+                url: "/",
+                type: 'POST',
+                data: {xValues_table3, yValues_table3}
+            });
+            return true;
+            }
+        else {
+            alert("X not sorted");
+            return false;
+        }
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
+}
+
+function confirm_op_3(amount) {
+    let yValues = new Array(amount);
+    let yValues_table3 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        let el = document.getElementById(`operand-3-${i}`).value;
+        yValues[i] = el;
+        yValues_table3 += el + " ";
+    }
+    if (checkUndefined(yValues, amount)) {
+        xValues_table3 = func_3_x;
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_table3, yValues_table3}
+        });
+        return true;
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
+};
+
+function table_arrays_differ(amount) {
+    let yValues_op_3_a = new Array(amount);
+    let yValues_op_3 = ""
+    for (let i = 0; i < amount - 1; i++) {
+        let el = document.getElementById(`operand-3-${i}`).value;
+        yValues_op_3_a[i] = el;
+        yValues_op_3 += el + " ";
+    }
+    if (checkUndefined(yValues_op_3_a, amount)) {
+        xValues_differ = func_3_x;
+        $.ajax ({
+            url: "/",
+            type: 'POST',
+            data: {xValues_differ, yValues_op_3}
+        });
+        return true;
+    }
+    else {
+        alert("Undefined values found");
+        return false;
+    }
 }

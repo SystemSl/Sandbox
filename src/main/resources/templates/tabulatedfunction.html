@@ -23,6 +23,7 @@
     <div th:insert="~{blocks/modals :: element_wise_operand_1}"></div>
     <div th:insert="~{blocks/modals :: element_wise_operand_2}"></div>
     <div th:insert="~{blocks/modals :: differentiation}"></div>
+    <div th:insert="~{blocks/modals :: differentiation_op_3}"></div>
     <div th:insert="~{blocks/modals :: settings}"></div>
 </div>
 <script>
@@ -30,8 +31,12 @@
     var func_1_y = "[[${func_1_y}]]";
     var func_2_x = "[[${func_2_x}]]";
     var func_2_y = "[[${func_2_y}]]";
+    var element_wise_result_x = "[[${element_wise_result_x}]]";
+    var element_wise_result_y = "[[${element_wise_result_y}]]";
     var func_3_x = "[[${func_3_x}]]";
     var func_3_y = "[[${func_3_y}]]";
+    var func_differ_x = "[[${func_differ_x}]]";
+    var func_differ_y = "[[${func_differ_y}]]";
 </script>>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script th:src="@{/javascript/main.js}"></script>
@@ -40,6 +45,8 @@
 <script th:src="@{/javascript/element_wise_operations.js}"></script>
 <script th:src="@{/javascript/operand_1.js}"></script>
 <script th:src="@{/javascript/operand_2.js}"></script>
+<script th:src="@{/javascript/differentiation.js}"></script>
+<script th:src="@{/javascript/operand_3.js}"></script>
 <script th:src="@{/javascript/settings.js}"></script>
 </body>
 </html>
