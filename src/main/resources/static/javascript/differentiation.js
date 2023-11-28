@@ -122,7 +122,6 @@ if (func_differ_x != "") {
     differ_area.setAttribute('id', "differ_area");
 
     document.getElementById('differ_result').appendChild(differ_area);
-    differ_area.classList.add("mt-5");
 
     tbl  = document.createElement('table');
     tbl.style.border = '1px solid black';

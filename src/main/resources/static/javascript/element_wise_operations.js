@@ -215,7 +215,6 @@ if (element_wise_result_x != "") {
 
     tbl  = document.createElement('table');
     tbl.style.border = '1px solid black';
-    tbl.classList.add("mt-5");
 
     for(var i = 0; i < element_wise_result_x_a.length; i++) {
         var tr = tbl.insertRow();
